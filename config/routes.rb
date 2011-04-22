@@ -1,6 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   
   map.admin_home '/admin_home', :controller => 'pages', :action => 'admin_home'
+  map.login '/login', :controller => 'login', :action => 'login'
   
   # The priority is based upon order of creation: first created -> highest priority.
 
