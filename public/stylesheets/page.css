@@ -360,3 +360,15 @@ hr{
 .fan_box .page_stream {
     height: 150px !important;
 }
+
+.welcome_text{
+	font-weight:bold;
+	float:right;
+}
+
+.date_text{
+	clear:both;
+	font-size:.8em;
+	float:right;
+	margin-bottom:7px;
+}

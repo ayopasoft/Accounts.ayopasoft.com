@@ -37,7 +37,9 @@
 			<div class="ayopa_site_header_right"></div>
 			<div class="ayopa_site_header_content">
 				<div class="ayopa_login_button">
-					<img src="images/retailer_login.png" alt="ayopa Log In" title="ayopa Log In" />
+					<a href="http://www.ayopasoft.com">
+					<img src="images/logout.png" alt="ayopa Log Out" title="ayopa Log Out" />
+					</a>
 				</div>
 				<a href="http://www.ayopasoft.com/index.html">
 					<img src="images/ayopa_software_tag_logo.png" alt="ayopa Home Page" title="ayopa Home Page" />
@@ -84,6 +86,13 @@
 				<!-- **************************** TEXT BLOCK ***************************** -->
 				<!-- ********************************************************************* -->
 					<div class="roundedCorners">
+						<div class="welcome_text">
+							Welcome, USER NAME
+						</div>
+						<div class="date_text">
+							<script >document.write((new Date().getMonth() +1) + "/" + new Date().getDate() + "/" + new Date().getFullYear() );</script>
+						</div>
+						<div class="clear"></div>
 						<%= yield %>
 						<div class="clear"></div>
 					</div>
