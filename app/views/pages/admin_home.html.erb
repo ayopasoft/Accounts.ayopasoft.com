@@ -1,0 +1,317 @@
+<% content_for :head do %>
+<script>
+	/* All you have to do is to call
+	 * a box() function on a selection
+	 */
+
+	$(document).ready(function() {
+
+		$(".tabs").tabs();
+
+		$("#merchant_report_table").tablesorter({widthFixed: true, widgets: ['zebra']})
+					.tablesorterPager({container: $("#pager"), positionFixed: false});
+		
+		$("#report2_table").tablesorter({widthFixed: true, widgets: ['zebra']})
+					.tablesorterPager({container: $("#pager2"), positionFixed: false});
+		
+		$("#auctions_table").tablesorter({widthFixed: true, widgets: ['zebra'], headers: {4:{sorter: false}}})
+					.tablesorterPager({container: $("#auctions_pager"), positionFixed: false});
+		
+		$("#rebates_table").tablesorter({widthFixed: true, widgets: ['zebra']})
+					.tablesorterPager({container: $("#rebates_pager"), positionFixed: false});
+
+		$("#merchants_table").tablesorter({widthFixed: true, widgets: ['zebra']})
+					.tablesorterPager({container: $("#merchants_pager"), positionFixed: false});
+
+	    
+
+		
+		$(".ayopa_login_button").click( function() {
+							jAlert('Retailer Log In Coming Soon!', 'Coming Soon!');
+						});
+		
+	});
+</script>
+<% end %>
+<div class="tabs">
+	<ul>
+		<li><a href="#admin_reports">Reports</a></li>
+		<li><a href="#admin_auctions">Auctions</a></li>
+		<li><a href="#admin_rebates">Rebates</a></li>
+		<li><a href="#admin_merchants">Merchants</a></li>
+	</ul>
+	<div id="admin_reports">
+		<div class="tabs">
+			<ul>
+				<li><a href="#admin_reports_merchant">Merchants Report</a></li>
+				<li><a href="#admin_reports_report2">Report 2</a></li>
+			</ul>
+			<div id="admin_reports_merchant">
+				<div id="pager" class="pager">
+					<form>
+						<img src="images/first.png" class="first"/>
+						<img src="images/prev.png" class="prev"/>
+						<input type="text" class="pagedisplay"/>
+						<img src="images/next.png" class="next"/>
+						<img src="images/last.png" class="last"/>
+						<select class="pagesize">
+							<option selected="selected"  value="10">10</option>
+
+							<option value="20">20</option>
+							<option value="30">30</option>
+							<option  value="40">40</option>
+						</select>
+					</form>
+				</div>
+				
+				<table id="merchant_report_table" class="tablesorter">
+					<thead>
+						<tr>
+							<th>Merchant Name</th>
+							<th>Merchant Contact</th>
+							<th>Merchant Email</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Happy Jack Software</td>
+							<td>Mona Gamboa</td>
+							<td>info@happyjacksoftware.com</td>
+						</tr>
+						<tr>
+							<td>John Doe Industries</td>
+							<td>John Doe</td>
+							<td>info@website.com</td>
+						</tr>
+						<tr>
+							<td>Widget Studios</td>
+							<td>Eric Despain</td>
+							<td>info@widgetstudios.com</td>
+						</tr>
+						<tr>
+							<td>Nother Company</td>
+							<td>Alice Nother</td>
+							<td>info@notherwebsite.com</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div id="admin_reports_report2">
+				<div id="pager2" class="pager">
+					<form>
+						<img src="images/first.png" class="first"/>
+						<img src="images/prev.png" class="prev"/>
+						<input type="text" class="pagedisplay"/>
+						<img src="images/next.png" class="next"/>
+						<img src="images/last.png" class="last"/>
+						<select class="pagesize">
+							<option selected="selected"  value="10">10</option>
+
+							<option value="20">20</option>
+							<option value="30">30</option>
+							<option  value="40">40</option>
+						</select>
+					</form>
+				</div>
+				
+				<table id="report2_table" class="tablesorter">
+					<thead>
+						<tr>
+							<th>Merchant Name</th>
+							<th>Total Sales</th>
+							<th>Rebate Total</th>
+							<th>Complaints</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Happy Jack Software</td>
+							<td>11255</td>
+							<td>$29312</td>
+							<td>554</td>
+						</tr>
+						<tr>
+							<td>John Doe Industries</td>
+							<td>152</td>
+							<td>$2332</td>
+							<td>35</td>
+						</tr>
+						<tr>
+							<td>Widget Studios</td>
+							<td>5564</td>
+							<td>$882</td>
+							<td>2</td>
+						</tr>
+						<tr>
+							<td>Nother Company</td>
+							<td>8982</td>
+							<td>$515557</td>
+							<td>225</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div id="admin_auctions">
+		<div id="auctions_pager" class="pager">
+			<form>
+				<img src="images/first.png" class="first"/>
+				<img src="images/prev.png" class="prev"/>
+				<input type="text" class="pagedisplay"/>
+				<img src="images/next.png" class="next"/>
+				<img src="images/last.png" class="last"/>
+				<select class="pagesize">
+					<option selected="selected"  value="10">10</option>
+
+					<option value="20">20</option>
+					<option value="30">30</option>
+					<option  value="40">40</option>
+				</select>
+			</form>
+		</div>
+		
+		<table id="auctions_table" class="tablesorter">
+			<thead>
+				<tr>
+					<th>Merchant Name</th>
+					<th>Purchasers</th>
+					<th>Current Rebate</th>
+					<th>Current Price</th>
+					<th><input type="button" value="End All Auctions" /></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Happy Jack Software</td>
+					<td>11255</td>
+					<td>$29</td>
+					<td>$554</td>
+					<td><input type="button" value="End Auction Early" /></td>
+				</tr>
+				<tr>
+					<td>John Doe Industries</td>
+					<td>152</td>
+					<td>$23</td>
+					<td>$305</td>
+					<td><input type="button" value="End Auction Early" /></td>
+				</tr>
+				<tr>
+					<td>Widget Studios</td>
+					<td>564</td>
+					<td>$82</td>
+					<td>$322</td>
+					<td><input type="button" value="End Auction Early" /></td>
+				</tr>
+				<tr>
+					<td>Nother Company</td>
+					<td>882</td>
+					<td>$557</td>
+					<td>$5225</td>
+					<td><input type="button" value="End Auction Early" /></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div id="admin_rebates">
+		<div id="rebates_pager" class="pager">
+			<form>
+				<img src="images/first.png" class="first"/>
+				<img src="images/prev.png" class="prev"/>
+				<input type="text" class="pagedisplay"/>
+				<img src="images/next.png" class="next"/>
+				<img src="images/last.png" class="last"/>
+				<select class="pagesize">
+					<option selected="selected"  value="10">10</option>
+
+					<option value="20">20</option>
+					<option value="30">30</option>
+					<option  value="40">40</option>
+				</select>
+			</form>
+		</div>
+		
+		<table id="rebates_table" class="tablesorter">
+			<thead>
+				<tr>
+					<th>Merchant Name</th>
+					<th>Product</th>
+					<th>Rebate Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td style="width:20%">Happy Jack Software</td>
+					<td style="width:20%">Best Software Suite</td>
+					<td>Check Sent<br /> <img src="images/check_sent.png" alt="2" /></td>
+				</tr>
+				<tr>
+					<td>John Doe Industries</td>
+					<td>Identity Security</td>
+					<td>Completed<br /> <img src="images/completed.png" alt="1" /></td>
+				</tr>
+				<tr>
+					<td>Widget Studios</td>
+					<td>Doodad</td>
+					<td>In Progress<br /> <img src="images/in_progress.png" alt="0" /></td>
+				</tr>
+				<tr>
+					<td>Nother Company</td>
+					<td>Nother Doodad</td>
+					<td>Completed<br /> <img src="images/completed.png" alt="1" /></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div id="admin_merchants">
+		<div id="merchants_pager" class="pager">
+			<form>
+				<img src="images/first.png" class="first"/>
+				<img src="images/prev.png" class="prev"/>
+				<input type="text" class="pagedisplay"/>
+				<img src="images/next.png" class="next"/>
+				<img src="images/last.png" class="last"/>
+				<select class="pagesize">
+					<option selected="selected"  value="10">10</option>
+
+					<option value="20">20</option>
+					<option value="30">30</option>
+					<option  value="40">40</option>
+				</select>
+			</form>
+		</div>
+		
+		<table id="merchants_table" class="tablesorter">
+			<thead>
+				<tr>
+					<th>Merchant Name</th>
+					<th>Products</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td style="width:20%">Happy Jack Software</td>
+					<td style="width:20%">Best Software Suite</td>
+					<td><input type="button" value="Inactivate" /></td>
+				</tr>
+				<tr>
+					<td>John Doe Industries</td>
+					<td>Identity Security</td>
+					<td><input type="button" value="Inactivate" /></td>
+				</tr>
+				<tr>
+					<td>Widget Studios</td>
+					<td>Doodad</td>
+					<td><input type="button" value="Inactivate" /></td>
+				</tr>
+				<tr>
+					<td>Nother Company</td>
+					<td>Nother Doodad</td>
+					<td><input type="button" value="Inactivate" /></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	
+</div>

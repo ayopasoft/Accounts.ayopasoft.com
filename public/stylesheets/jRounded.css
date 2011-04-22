@@ -1,0 +1,7 @@
+/* -- jRounded -- */
+.box{position:relative;background-color:#E7F5DC;margin-bottom:15px;padding:20px;}
+.box .tl,.box .tr,.box .bl,.box .br{position:absolute;width:8px;height:8px;}
+.box .tl{background-image:url(../images/box-tl.png);top:0;left:0;}
+.box .tr{background-image:url(../images/box-tr.png);top:0;right:0;}
+.box .bl{background-image:url(../images/box-bl.png);bottom:0;left:0;}
+.box .br{background-image:url(../images/box-br.png);bottom:0;right:0;}
