@@ -15,3 +15,12 @@ config.action_controller.perform_caching             = false
 
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
+
+config.action_mailer.smtp_settings = {
+  :address => "remote.happyjacksoftware.com",
+  :port => 2525,
+  :user_name => "info@wyo4ed.org",
+  :authentication => :plain,
+  :domain => "wyo4ed.org",
+  :password => "M8brer3n"
+}

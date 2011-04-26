@@ -1,0 +1,22 @@
+<h1>New admin</h1>
+
+<% form_for(@admin) do |f| %>
+  <%= f.error_messages %>
+<p>
+    <%= f.label :admin_email, "Email" %><br />
+    <%= f.text_field :admin_email, :size => 34 %>
+  </p>
+  <p>
+    <%= f.label :password, "Password" %><br />
+    <%= f.password_field :password, :size => 34 %>
+  </p>
+  <p>
+    <%= f.label :password, "Password Confirm" %><br />
+    <%= f.password_field :password_confirmation, :size => 34 %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', admins_path %>

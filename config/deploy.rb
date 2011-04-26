@@ -1,6 +1,6 @@
 set :stage, "dev" unless variables[:stage]
 
-set :application, "ayopa_rails"
+set :application, "dev.accounts.ayopasoft.com"
 set :repository,  "svn+ssh://kzimmerman@office.happyjacksoftware.com/usr/local/svn_repo/#{application}/trunk"
 
 # If you aren't deploying to /u/apps/#{application} on the target

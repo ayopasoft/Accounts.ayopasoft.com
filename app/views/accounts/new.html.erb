@@ -1,0 +1,103 @@
+<% content_for :head do -%>
+<%= stylesheet_link_tag "fancybox/jquery.fancybox-1.3.4.css", :cache => false %>
+<%= javascript_include_tag "fancybox/jquery.fancybox-1.3.4.pack.js", :cache => false %>
+
+	<script>
+		/* All you have to do is to call
+		 * a box() function on a selection
+		 */
+
+		$(document).ready(function() {
+			
+			<% unless flash[:errors].blank? -%>
+			  jAlert('<%= error_messages_for :account, :header_message => "" %>');
+			<% end -%>
+			
+			$(".partnerHelp").click( function() {
+								jAlert('If you want to sell items on ayopa please check this box, If you only want to purchase products do not check this box', 'ayopa Partner');
+							});
+			
+		
+			$(".extLink").fancybox({
+				'width' : '56',
+				'height' : '35',
+				'autoScale' : false,
+				'transitionIn' : 'none',
+				'transitionOut' : 'none',
+				'type' : 'iframe',
+				'padding' : '0',
+				'overlayColor' : '#000000'
+			});
+			$(".termsLink").fancybox({
+				'width' : '75%',
+				'height' : '80%',
+				'autoScale' : false,
+				'transitionIn' : 'none',
+				'transitionOut' : 'none',
+				'type' : 'iframe',
+				'padding' : '0',
+				'overlayColor' : '#000000'
+			});
+		});
+	</script>
+	<style type="text/css">
+		.partnerHelp:hover{
+			cursor:pointer;
+		}
+		.partnerHelp{
+			color:#000099;
+			text-decoration:underline;
+		}
+		
+		.fieldWithErrors input {
+			border:2px solid red;
+			margin:0;
+			
+		}
+	</style>
+
+<% end -%>
+
+<%= error_messages_for :account, :header_message => "" %>
+<div class="roundedCorners">
+	
+							<h1>Account Sign-up</h1>
+
+							<hr />
+
+							<% form_for(@account) do |f| %><div style="margin:0;padding:0;display:inline"></div>
+										<span class="required">*</span>First name :<br/>
+										<%= f.text_field :first_name, :size => 30 %>
+
+										<br/><br/>
+										<span class="required">*</span>Last Name:<br/>
+
+										<%= f.text_field :last_name, :size => 30 %>
+										<br/><br/>
+										<span class="required">*</span>Email(Your email will be your username):<br/>
+										<%= f.text_field :user_email, :size => 30 %>
+										<br/><br/>
+										<%= f.check_box :partner %> I want to become a partner <a class="partnerHelp">(?)</a>
+										
+										<br/><br/>
+										<span class="required">*</span>Password:<br/>
+										<%= f.password_field :user_password, :size => 30 %>
+										<br/><br/>
+										<span class="required">*</span>Confirm Password:<br/>
+										<%= f.password_field :user_password_confirmation, :size => 30 %>
+										<br /><br />
+
+										<%= f.check_box :terms %>&nbsp;I agree to the <a href="<%= terms_text_path %>" class="termsLink">terms of service</a>&nbsp;
+
+										<br/><br/>
+										<%= image_submit_tag '/images/create_account.png' %>
+										
+							      <br/>
+							     <% end %>            
+							
+
+							<div class="clear"></div>
+						</div>
+						
+						<div class="clear"></div>
+						

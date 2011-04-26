@@ -1,9 +1,20 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :accounts
+
+  map.resources :admins
+
   
   map.admin_home '/admin_home', :controller => 'pages', :action => 'admin_home'
   map.merchant_home '/merchant_home', :controller => 'pages', :action => 'merchant_home'
   map.consumer_home '/consumer_home', :controller => 'pages', :action => 'consumer_home'
   map.login '/login', :controller => 'login', :action => 'login'
+  
+  map.reset_password '/reset_password/:reset_code', :controller => 'login', :action => 'reset_password'
+  map.forgot_password '/forgot_password', :controller => 'login', :action => 'forgot_password'
+  map.new_account '/new_account', :controller => 'accounts', :action => 'new'
+  map.terms_text '/terms', :controller => 'accounts', :action => 'terms_text'
+  
+  map.root :controller => 'login', :action => 'login'
   
   # The priority is based upon order of creation: first created -> highest priority.
 
