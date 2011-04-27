@@ -4,7 +4,7 @@
 		<hr />
 		Don't have an account? <a href="<%= new_account_path %>" target="_parent">Create One!</a><br />
 		<br />
-		<% form_tag do %>
+		<% form_tag ({:action => 'login'}, {:target => "_parent"}) do %>
 			   <div style="width:100px; float:left">Username:</div><input id="userName" type="text" name="userName" size="35" value="" tabindex="1"/>
 			<br /><br />
 		       <div style="width:100px; float:left; clear:both">Password:</div><input id="password" type="password" name="password" size="35" value="" tabindex="2"/>
