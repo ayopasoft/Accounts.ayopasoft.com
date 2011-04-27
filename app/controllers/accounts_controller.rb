@@ -56,8 +56,14 @@ class AccountsController < ApplicationController
                   user = Merchant.new
                   user.save_account(params[:account])
           else
+              user = Buyer.find(:first, :conditions => ['`buyer_email` = ?', params[:account][:user_email]])
+              if user
+                   user.save_account(params[:account])
+              else
                    user = Buyer.new
                    user.save_account(params[:account])
+              end
+                   
           end          
         
         format.html { redirect_to(:controller => 'login', :action => 'login', :notice => 'Account was successfully created.') }

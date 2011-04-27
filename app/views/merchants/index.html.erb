@@ -220,15 +220,15 @@
 			<div id="merchant_paypal">
 				<% form_for(@merchant) do |f| %>
 				<div style="width:160px; float:left; clear:both">Paypal Email Address:</div>
-					<%= f.text_field :merchant_paypal, :size => 35 %>
-					<%= image_submit_tag '/images/next.png', :id => session[:user_id] %>
+					<%= f.text_field :merchant_paypal, :size => 35 %> <br />
+					<%= image_submit_tag '/images/save.png', :id => session[:user_id] %>
 				<% end %>
 			</div>
 			<div id="merchant_facebook">
 				<% form_for(@merchant) do |f| %>
 					<div style="width:150px; float:left; clear:both">Facebook Page ID:</div>
-					<%= f.text_field :merchant_fb_page, :size => 35 %>
-					<%= image_submit_tag '/images/next.png', :id => session[:user_id] %>
+					<%= f.text_field :merchant_fb_page, :size => 35 %> <br />
+					<%= image_submit_tag '/images/save.png', :id => session[:user_id] %>
 				<% end %>
 			</div>
 		</div>

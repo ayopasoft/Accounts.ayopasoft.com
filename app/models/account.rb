@@ -9,7 +9,7 @@ class Account < ActiveRecord::Base
 
 protected
 def unique_email
-  user = User.lookup_by_email(self.user_email)
+  user = Merchant.find(:first, :conditions => ["`merchant_email` = ?", self.user_email])
   errors.add(:user_email, "has already been registered with ayopa") unless user.nil?
 end
 
