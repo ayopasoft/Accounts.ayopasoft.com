@@ -1,3 +1,5 @@
+require 'digest/sha1'
+
 class LoginController < ApplicationController
   layout 'login'
   
@@ -6,20 +8,44 @@ class LoginController < ApplicationController
     if request.post?
       user = User.authenticate(params[:userName], params[:password])
       if user
-          if user.type == "buyer" 
-            redirect_to(:controller => 'pages', :action => 'consumer_home', :id => user.id)
+         session[:user_id] = user.id
+         
+          if params[:remember]  
+              userId = (user.id).to_s  
+              cookies[:remember_me_id] = { :value => userId, :expires => 30.days.from_now }  
+              userCode = Digest::SHA1.hexdigest( user.email )[4,18]  
+              cookies[:remember_me_code] = { :value => userCode, :expires => 30.days.from_now }  
+          end 
+          
+          if user.type == "buyer"
+            session[:user_type] = "buyer"
+            session[:user_name] = user.buyer_name
+            redirect_to(:controller => 'buyers', :action => 'index', :id => user.id)
           elsif user.type == "merchant"
-             redirect_to(:controller => 'pages', :action => 'merchant_home', :id => user.id)
+             session[:user_type] = "merchant"
+             session[:user_name] = user.merchant_name
+             redirect_to(:controller => 'merchants', :action => 'index', :id => user.id)
           elsif user.type == "admin"
-             redirect_to(:controller => 'pages', :action => 'admin_home', :id => user.id)
+            session[:user_type] = "admin"
+            session[:user_name] = "ADMIN"
+             redirect_to(:controller => 'admins', :action => 'index', :id => user.id)
           else
-            redirect_to(:controller => 'pages', :action => 'consumer_home', :id => user.id)
+            redirect_to(:controller => 'login', :action => 'login', :id => user.id)
           end
       else
         flash.now[:alert] = "Invalid user/password combination"
       end
     end
  end
+ 
+ def logout
+    session[:user_id] = nil
+    session[:user_type] = nil
+    session[:user_name] = nil
+    if cookies[:remember_me_id] then cookies.delete :remember_me_id end  
+    if cookies[:remember_me_code] then cookies.delete :remember_me_code end 
+    redirect_to(root_path)
+  end
 
 def forgot_password
     if request.post?

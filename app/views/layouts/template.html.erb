@@ -46,7 +46,7 @@
 			<div class="ayopa_site_header_right"></div>
 			<div class="ayopa_site_header_content">
 				<div class="ayopa_login_button">
-					<a href="http://www.ayopasoft.com">
+					<a href="<%= logout_path %>">
 					<img src="images/logout.png" alt="ayopa Log Out" title="ayopa Log Out" />
 					</a>
 				</div>
@@ -96,7 +96,7 @@
 				<!-- ********************************************************************* -->
 					<div class="roundedCorners">
 						<div class="welcome_text">
-							Welcome, USER NAME
+							Welcome, <%= session[:user_name] %>
 						</div>
 						<div class="date_text">
 							<script >document.write((new Date().getMonth() +1) + "/" + new Date().getDate() + "/" + new Date().getFullYear() );</script>

@@ -42,6 +42,24 @@ class User < ActiveRecord::Base
    user
  end
  
+ def self.lookup_by_id(id)
+     user = Admin.find(:first, :conditions => ['`id` = ?', id])
+     if user
+       user.type= "admin"
+     else
+         user = Buyer.find(:first, :conditions => ['`id` = ?', id])
+         if user
+           user.type = "buyer"
+         else
+           user = Merchant.find(:first, :conditions => ['`id` = ?', id])
+           if user
+             user.type = "merchant"
+           end
+        end
+   end
+   user
+ end
+ 
   def self.reset_user(reset_code)
     user = Admin.find_by_reset_code(reset_code)
     if user

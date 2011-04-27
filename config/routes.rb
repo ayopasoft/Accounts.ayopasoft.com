@@ -1,13 +1,20 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :consumers
+
+  map.resources :merchants
+
   map.resources :accounts
 
   map.resources :admins
+  
+  map.resources :buyers
 
   
   map.admin_home '/admin_home', :controller => 'pages', :action => 'admin_home'
   map.merchant_home '/merchant_home', :controller => 'pages', :action => 'merchant_home'
   map.consumer_home '/consumer_home', :controller => 'pages', :action => 'consumer_home'
   map.login '/login', :controller => 'login', :action => 'login'
+  map.logout '/logout', :controller => 'login', :action => 'logout'
   
   map.reset_password '/reset_password/:reset_code', :controller => 'login', :action => 'reset_password'
   map.forgot_password '/forgot_password', :controller => 'login', :action => 'forgot_password'

@@ -5,7 +5,7 @@ class Merchant < SimpleRecord::Base
   include Alias::Legacy
   
   set_domain_name 'ayopa-merchants'
-  has_attributes 'merchant_username', 'merchant_password', 'merchant_fb_page', 'merchant_email', 'reset_code','merchant_salt','merchant_contact'
+  has_attributes 'merchant_username', 'merchant_password', 'merchant_fb_page', 'merchant_email', 'reset_code','merchant_salt','merchant_contact','merchant_name','merchant_paypal'
   
  
   alias_column 'email' => 'merchant_email'

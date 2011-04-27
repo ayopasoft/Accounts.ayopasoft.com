@@ -1,7 +1,7 @@
 set :stage, "dev" unless variables[:stage]
-
+set :username, "rdeploy"
 set :application, "dev.accounts.ayopasoft.com"
-set :repository,  "svn+ssh://kzimmerman@office.happyjacksoftware.com/usr/local/svn_repo/#{application}/trunk"
+set :repository,  "svn+ssh://#{username}@office.happyjacksoftware.com/usr/local/svn_repo/Ayopa_Rails/trunk"
 
 # If you aren't deploying to /u/apps/#{application} on the target
 # servers (which is the default), you can specify the actual location
@@ -14,14 +14,14 @@ set :deploy_via, :export
 # set :scm, :subversion                           
 case stage
 when "dev"
-  set :user, "kzimmerman"
+  set :user, username
   role :app, "dev.accounts.ayopasoft.com"
   role :web, "dev.accounts.ayopasoft.com"
   role :db,  "dev.accounts.ayopasoft.com", :primary => true 
   set :run_method, :sudo  
   set :rails_env, "development"
 when "prod"
-  set :user, "kzimmerman"
+  set :user, username
   role :app, "accounts.ayopasoft.com"
   role :web, "accounts.ayopasoft.com"
   role :db,  "accounts.ayopasoft.com", :primary => true  
