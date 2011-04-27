@@ -213,10 +213,36 @@
 	<div id="merchant_account">
 		<div class="tabs">
 			<ul>
+				<li><a href="#merchant_info">Info</a></li>
 				<li><a href="#merchant_paypal">PayPal</a></li>
 				<li><a href="#merchant_facebook">Facebook</a></li>
 				<li><a href="#merchant_password">Password</a></li>
 			</ul>
+			<div id="merchant_info">
+				<% form_for(@merchant) do |f| %>
+				<div style="width:130px; float:left; clear:both">Company Name:</div>
+					<%= f.text_field :merchant_name, :size => 35 %> <br /><br />
+				<div style="width:130px; float:left; clear:both">Contact Name:</div>
+					<%= f.text_field :merchant_contact, :size => 35 %> <br /><br />
+				<div style="width:130px; float:left; clear:both">Address (1):</div>
+					<%= f.text_field :merchant_address1, :size => 35 %> <br /><br />
+				<div style="width:130px; float:left; clear:both">Address (2):</div>
+					<%= f.text_field :merchant_address2, :size => 35 %> <br /><br />
+				<div style="width:350px; float:left; clear:both"><span style="width:130px; display:block; float:left">City:</span
+					<%= f.text_field :merchant_city, :size => 20 %> </div>
+				<div style="width:130px; float:left; "><span style="width:50px; display:block; float:left">State:</span>
+		<%= f.text_field :merchant_state, :size => 3 %></div>
+	    <div style="width:130px; float:left;">Zip: 
+		<%= f.text_field :merchant_postalcode, :size => 5 %></div>
+		<div style="width:130px; float:left;">Country: 
+		<%= f.text_field :merchant_country, :size => 5 %></div><br /><br />
+		<div style="width:130px; float:left; clear:both">Website:</div>
+					<%= f.text_field :merchant_website, :size => 69 %> <br /><br />
+		<div style="width:130px; float:left; clear:both">Email:</div>
+					<%= f.text_field :email, :size => 69 %> <br /><br />
+					<%= image_submit_tag '/images/save.png', :id => session[:user_id] %>
+				<% end %>
+			</div>
 			<div id="merchant_paypal">
 				<% form_for(@merchant) do |f| %>
 				<div style="width:160px; float:left; clear:both">Paypal Email Address:</div>

@@ -3,6 +3,16 @@ class AdminsController < ApplicationController
   
   before_filter :admin_authorize
   
+  def new_merchant
+    Merchant.create(params[:admin])
+    respond_to do |format|
+      
+        format.html { redirect_to(:controller => 'admins', :action => 'index', :notice => 'Merchant was successfully created.') }
+        format.xml  { render :xml => @admin, :status => :created, :location => @merchant }
+      
+    end
+  end
+  
   # GET /admins
   # GET /admins.xml
   def index
