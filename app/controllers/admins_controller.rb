@@ -1,5 +1,8 @@
 class AdminsController < ApplicationController
   layout 'template'
+  
+  before_filter :admin_authorize
+  
   # GET /admins
   # GET /admins.xml
   def index

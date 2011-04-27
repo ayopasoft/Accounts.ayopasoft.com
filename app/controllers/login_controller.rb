@@ -6,7 +6,7 @@ class LoginController < ApplicationController
     
   def login
     if request.post?
-      user = User.authenticate(params[:userName], params[:password])
+      user = User.authenticate(params[:userName], params[:password]) unless params[:password].blank? || params[:userName].blank?
       if user
          session[:user_id] = user.id
          
