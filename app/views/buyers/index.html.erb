@@ -53,46 +53,30 @@
 					<thead>
 						<tr>
 							<th>Product</th>
-							<th>Start Price</th>
+							<th>Purchase Price</th>
 							<th>Current Price</th>
-							<th>Lowest Price</th>
 							<th>Current Buyers</th>
+							
+							<th>Lowest Price</th>
 							<th>Max Buyers</th>
 						</tr>
 					</thead>
 					<tbody>
+						<% @purchases.each do |p| %>
+						<% if p.auction_expired != 1%>
 						<tr>
-							<td>Happy Jack Software</td>
-							<td>$300</td>
-							<td>$290</td>
-							<td>$250</td>
-							<td>25</td>
-							<td>75</td>
+							<td><%= p.product_name %></td>
+							<td><%=h number_to_currency p.purchase_price %></td>
+							<td><%=h number_to_currency p.current_price %></td>
+							<td><%= p.current_level %></td>
+							
+							<td><%=h number_to_currency p.lowest_price%></td>
+							
+							<td><%= p.lowest_level %></td>
 						</tr>
-						<tr>
-							<td>John Doe Industries</td>
-							<td>$720</td>
-							<td>$590</td>
-							<td>$350</td>
-							<td>23</td>
-							<td>95</td>
-						</tr>
-						<tr>
-							<td>Widget Studios</td>
-							<td>$600</td>
-							<td>$590</td>
-							<td>$450</td>
-							<td>84</td>
-							<td>250</td>
-						</tr>
-						<tr>
-							<td>Nother Company</td>
-							<td>$30</td>
-							<td>$28</td>
-							<td>$25</td>
-							<td>3</td>
-							<td>250</td>
-						</tr>
+						<% end %>
+						<% end %>
+						
 					</tbody>
 				</table>
 			</div>
@@ -119,30 +103,30 @@
 							<tr>
 								<th>Merchant Name</th>
 								<th>Product</th>
+								
 								<th>Rebate Status</th>
+								<th>Rebate Amount</th>
+								
 							</tr>
 						</thead>
 						<tbody>
+							<% @purchases.each do |p| %>
 							<tr>
-								<td style="width:20%">Happy Jack Software</td>
-								<td style="width:20%">Best Software Suite</td>
-								<td>Check Sent<br /> <img src="images/check_sent.png" alt="2" /></td>
+								<td style="width:20%"><%= p.merchant_name %></td>
+								<td style="width:20%"><%= p.product_name %></td>
+								
+								<td>
+									<% if p.rebate_sent == "1" %>
+										Check Sent<br /> <img src="images/check_sent.png" alt="2" />
+									<% elsif p.auction_expired  %>
+										Completed<br /> <img src="images/completed.png" alt="2" />
+									<% else %>
+										In Progress<br /> <img src="images/in_progress.png" alt="0" />
+									<% end %>
+								</td>
+								<td><%=h number_to_currency p.savings %></td>
 							</tr>
-							<tr>
-								<td>John Doe Industries</td>
-								<td>Identity Security</td>
-								<td>Completed<br /> <img src="images/completed.png" alt="1" /></td>
-							</tr>
-							<tr>
-								<td>Widget Studios</td>
-								<td>Doodad</td>
-								<td>In Progress<br /> <img src="images/in_progress.png" alt="0" /></td>
-							</tr>
-							<tr>
-								<td>Nother Company</td>
-								<td>Nother Doodad</td>
-								<td>Completed<br /> <img src="images/completed.png" alt="1" /></td>
-							</tr>
+							<% end %>
 						</tbody>
 					</table>
 			</div>

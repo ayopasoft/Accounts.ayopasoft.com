@@ -9,19 +9,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110428135518) do
+ActiveRecord::Schema.define(:version => 20110427010926) do
 
   create_table "accounts", :force => true do |t|
   end
 
   create_table "admins", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "buyers", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "consumers", :force => true do |t|
@@ -31,8 +27,6 @@ ActiveRecord::Schema.define(:version => 20110428135518) do
   end
 
   create_table "users", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
 end

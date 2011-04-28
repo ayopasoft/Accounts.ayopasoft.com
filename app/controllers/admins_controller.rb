@@ -4,7 +4,10 @@ class AdminsController < ApplicationController
   before_filter :admin_authorize
   
   def new_merchant
-    Merchant.create(params[:admin])
+   if Merchant.create(params[:admin])
+     
+   end
+    
     respond_to do |format|
       
         format.html { redirect_to(:controller => 'admins', :action => 'index', :notice => 'Merchant was successfully created.') }
