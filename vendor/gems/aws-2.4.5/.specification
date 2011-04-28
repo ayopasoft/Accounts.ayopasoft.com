@@ -1,0 +1,164 @@
+--- !ruby/object:Gem::Specification 
+name: aws
+version: !ruby/object:Gem::Version 
+  version: 2.4.5
+platform: ruby
+authors: 
+- Travis Reeder
+- Chad Arimura
+- RightScale
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2011-03-10 00:00:00 -07:00
+default_executable: 
+dependencies: 
+- !ruby/object:Gem::Dependency 
+  name: uuidtools
+  type: :runtime
+  version_requirement: 
+  version_requirements: !ruby/object:Gem::Requirement 
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        version: "0"
+    version: 
+- !ruby/object:Gem::Dependency 
+  name: http_connection
+  type: :runtime
+  version_requirement: 
+  version_requirements: !ruby/object:Gem::Requirement 
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        version: "0"
+    version: 
+- !ruby/object:Gem::Dependency 
+  name: xml-simple
+  type: :runtime
+  version_requirement: 
+  version_requirements: !ruby/object:Gem::Requirement 
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        version: "0"
+    version: 
+- !ruby/object:Gem::Dependency 
+  name: activesupport
+  type: :runtime
+  version_requirement: 
+  version_requirements: !ruby/object:Gem::Requirement 
+    requirements: 
+    - - ">="
+      - !ruby/object:Gem::Version 
+        version: "0"
+    version: 
+description: AWS Ruby Library for interfacing with Amazon Web Services including EC2, S3, SQS, SimpleDB and most of their other services as well. By http://www.appoxy.com
+email: travis@appoxy.com
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- README.markdown
+files: 
+- lib/acf/acf_interface.rb
+- lib/aws.rb
+- lib/awsbase/aws_response_array.rb
+- lib/awsbase/awsbase.rb
+- lib/awsbase/benchmark_fix.rb
+- lib/awsbase/errors.rb
+- lib/awsbase/parsers.rb
+- lib/awsbase/require_relative.rb
+- lib/awsbase/support.rb
+- lib/awsbase/utils.rb
+- lib/ec2/ec2.rb
+- lib/ec2/mon_interface.rb
+- lib/elb/elb_interface.rb
+- lib/iam/iam.rb
+- lib/rds/rds.rb
+- lib/right_aws.rb
+- lib/s3/bucket.rb
+- lib/s3/grantee.rb
+- lib/s3/key.rb
+- lib/s3/s3.rb
+- lib/s3/s3_interface.rb
+- lib/sdb/active_sdb.rb
+- lib/sdb/sdb_interface.rb
+- lib/sqs/sqs.rb
+- lib/sqs/sqs_interface.rb
+- README.markdown
+- test/acf/test_acf.rb
+- test/acf/test_helper.rb
+- test/ec2/test_ec2.rb
+- test/ec2/test_helper.rb
+- test/ec2/test_mon.rb
+- test/elb/test_elb.rb
+- test/http_connection.rb
+- test/iam/test_iam.rb
+- test/rds/test_rds.rb
+- test/s3/s3_test_base.rb
+- test/s3/test_helper.rb
+- test/s3/test_s3.rb
+- test/s3/test_s3_class.rb
+- test/s3/test_s3_rights.rb
+- test/s3/test_s3_stubbed.rb
+- test/sdb/test_active_sdb.rb
+- test/sdb/test_helper.rb
+- test/sdb/test_sdb.rb
+- test/sqs/test_helper.rb
+- test/sqs/test_sqs.rb
+- test/test_credentials.rb
+- test/ts_right_aws.rb
+has_rdoc: true
+homepage: http://github.com/appoxy/aws/
+licenses: []
+
+post_install_message: 
+rdoc_options: []
+
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: []
+
+rubyforge_project: 
+rubygems_version: 1.3.5
+signing_key: 
+specification_version: 3
+summary: AWS Ruby Library for interfacing with Amazon Web Services. By http://www.appoxy.com
+test_files: 
+- test/acf/test_acf.rb
+- test/acf/test_helper.rb
+- test/ec2/test_ec2.rb
+- test/ec2/test_helper.rb
+- test/ec2/test_mon.rb
+- test/elb/test_elb.rb
+- test/http_connection.rb
+- test/iam/test_iam.rb
+- test/rds/test_rds.rb
+- test/s3/s3_test_base.rb
+- test/s3/test_helper.rb
+- test/s3/test_s3.rb
+- test/s3/test_s3_class.rb
+- test/s3/test_s3_rights.rb
+- test/s3/test_s3_stubbed.rb
+- test/sdb/test_active_sdb.rb
+- test/sdb/test_helper.rb
+- test/sdb/test_sdb.rb
+- test/sqs/test_helper.rb
+- test/sqs/test_sqs.rb
+- test/test_credentials.rb
+- test/ts_right_aws.rb

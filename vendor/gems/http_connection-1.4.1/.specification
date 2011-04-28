@@ -1,0 +1,57 @@
+--- !ruby/object:Gem::Specification 
+name: http_connection
+version: !ruby/object:Gem::Version 
+  version: 1.4.1
+platform: ruby
+authors: 
+- Travis Reeder
+- RightScale
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2011-04-19 00:00:00 -06:00
+default_executable: 
+dependencies: []
+
+description: HTTP helper library
+email: travis@appoxy.com
+executables: []
+
+extensions: []
+
+extra_rdoc_files: 
+- README.txt
+files: 
+- lib/right_http_connection.rb
+- README.txt
+has_rdoc: true
+homepage: http://github.com/appoxy/http_connection/
+licenses: []
+
+post_install_message: 
+rdoc_options: []
+
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: []
+
+rubyforge_project: 
+rubygems_version: 1.3.5
+signing_key: 
+specification_version: 3
+summary: HTTP helper library
+test_files: []
+
