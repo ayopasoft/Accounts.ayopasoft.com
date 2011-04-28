@@ -20,12 +20,14 @@ when "dev"
   role :db,  "dev.accounts.ayopasoft.com", :primary => true 
   set :run_method, :sudo  
   set :rails_env, "development"
+  set :use_sqlite3, true
 when "prod"
   set :user, username
   role :app, "accounts.ayopasoft.com"
   role :web, "accounts.ayopasoft.com"
   role :db,  "accounts.ayopasoft.com", :primary => true  
   set :run_method, :run 
+  set :use_sqlite3, true
 else
   raise "Unsupported staging environment: #{stage}"
 end
@@ -35,6 +37,8 @@ task :symlink_database_yml do
   run "ln -nsf #{shared_path}/config/database.yml #{release_path}/config/database.yml"
 end
 
+
+
 desc "Symlink the specific files from shared directory to current release directory."
 task :symlink_specifics do
   run "ln -nsf #{shared_path}/public/ayopa_static #{release_path}/public/ayopa_static"
@@ -42,6 +46,7 @@ task :symlink_specifics do
 end
 
 after "deploy:update_code", "symlink_database_yml", "symlink_specifics"
+
 
 namespace(:deploy) do
   desc "Restart server"
