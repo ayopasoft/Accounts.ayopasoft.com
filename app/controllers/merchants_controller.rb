@@ -31,6 +31,21 @@ class MerchantsController < ApplicationController
       format.xml  { render :xml => @merchants }
     end
   end
+  
+  def set_password
+    if !params[:merchant][:password].blank? && !params[:merchant][:password_confirmation].blank? && params[:merchant][:password] == params[:merchant][:password_confirmation]
+      user = Merchant.find(params[:merchant][:id])
+      if user
+        user.set_password(params[:merchant][:password], params[:merchant][:password_confirmation])
+        flash[:alert] = "Password has been set"
+      else
+        flash[:alert] = "Password cannot be set at this time"
+      end
+    else
+      flash[:alert] = "Password/Password confirmation blank or passwords do not match"
+    end
+    redirect_to :controller => "merchants", :action => "index"
+  end
 
   # GET /merchants/1
   # GET /merchants/1.xml

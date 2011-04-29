@@ -10,6 +10,7 @@ class Merchant < SimpleRecord::Base
   'merchant_address2', 'merchant_city', 'merchant_state', 'merchant_postalcode', 'merchant_website', \
   'merchant_country', 'merchant_id', 'merchant_inactive'
   
+  attr_accessor :password_confirmation
  
   alias_column 'email' => 'merchant_email'
   alias_column 'salt' => 'merchant_salt'
@@ -31,6 +32,13 @@ class Merchant < SimpleRecord::Base
   
    def password
     @password
+  end
+  
+  def password=(pwd)
+    @password = pwd
+    return if pwd.blank?
+    create_new_salt
+    self.merchant_password = Merchant.encrypted_password(self.password, self.salt)
   end
   
   def inactivate
@@ -55,8 +63,9 @@ class Merchant < SimpleRecord::Base
   def set_password (password, password_confirmation)
     errors.add('Passwords', 'do not match') unless password_confirmation == password
     create_new_salt
-    hashed_password = Merchant.encrypted_password(password, self.salt)
-    self.password = hashed_password
+    #hashed_password = Merchant.encrypted_password(password, self.salt)
+    #self.password = hashed_password
+    self.password = password
     self.save
   end
   

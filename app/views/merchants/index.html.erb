@@ -170,26 +170,23 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td style="width:20%">Happy Jack Software</td>
-							<td style="width:20%">Best Software Suite</td>
-							<td>Check Sent<br /> <img src="images/check_sent.png" alt="2" /></td>
-						</tr>
-						<tr>
-							<td>John Doe Industries</td>
-							<td>Identity Security</td>
-							<td>Completed<br /> <img src="images/completed.png" alt="1" /></td>
-						</tr>
-						<tr>
-							<td>Widget Studios</td>
-							<td>Doodad</td>
-							<td>In Progress<br /> <img src="images/in_progress.png" alt="0" /></td>
-						</tr>
-						<tr>
-							<td>Nother Company</td>
-							<td>Nother Doodad</td>
-							<td>Completed<br /> <img src="images/completed.png" alt="1" /></td>
-						</tr>
+						<% @auctions.each do |a| %>
+							<tr>
+								<td style="width:20%"><%= a.merchant_name %></td>
+								<td style="width:20%"><%= a.product_name %></td>
+								
+								<td>
+									<% if a.rebate_sent == "1" %>
+										Check Sent<br /> <img src="images/check_sent.png" alt="2" />
+									<% elsif a.auction_expired  %>
+										Completed<br /> <img src="images/completed.png" alt="2" />
+									<% else %>
+										In Progress<br /> <img src="images/in_progress.png" alt="0" />
+									<% end %>
+								</td>
+								
+							</tr>
+				<% end %>
 					</tbody>
 				</table>
 			</div>
@@ -201,7 +198,7 @@
 				<li><a href="#merchant_info">Info</a></li>
 				<li><a href="#merchant_paypal">PayPal</a></li>
 				<li><a href="#merchant_facebook">Facebook</a></li>
-				<li><a href="#merchant_password">Password</a></li>
+				<li><a href="#merchant_set_password">Password</a></li>
 			</ul>
 			<div id="merchant_info">
 				<% form_for(@merchant) do |f| %>
@@ -240,6 +237,16 @@
 					<div style="width:150px; float:left; clear:both">Facebook Page ID:</div>
 					<%= f.text_field :merchant_fb_page, :size => 35 %> <br />
 					<%= image_submit_tag '/images/save.png', :id => session[:user_id] %>
+				<% end %>
+			</div>
+			<div id="merchant_set_password">
+				<% form_for :merchant, :url => {:action => "set_password"} do |f| %>
+					<div style="width:150px; float:left; clear:both">Password:</div>
+					<%= f.password_field :password, :size => 35 %> <br /><br />
+					<div style="width:150px; float:left; clear:both">Password Confirm:</div>
+					<%= f.password_field :password_confirmation, :size => 35 %> <br />
+					<%= image_submit_tag '/images/save.png', :id => session[:user_id] %>
+					<%= f.hidden_field :id, :value => session[:user_id] %>
 				<% end %>
 			</div>
 		</div>
