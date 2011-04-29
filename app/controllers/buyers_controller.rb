@@ -36,7 +36,13 @@ class BuyersController < ApplicationController
         p.auction_expired = 1
       end
       
+      if @auction.auction_deleted == "1"
+        p.auction_deleted = 1
+      end
+      
     end
+    
+    #@purchases.delete_if {|p| p.auction_deleted == "1"}
 
     respond_to do |format|
       format.html # index.html.erb
@@ -49,7 +55,7 @@ class BuyersController < ApplicationController
 
     respond_to do |format|
       if @buyer.update_attributes(params[:buyer])
-        format.html { redirect_to(:controller => 'buyers', :action => 'index', :notice => 'Buyer was successfully updated.') }
+        format.html { redirect_to(:controller => 'buyers', :action => 'index') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

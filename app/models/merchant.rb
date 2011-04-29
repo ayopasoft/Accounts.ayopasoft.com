@@ -8,7 +8,7 @@ class Merchant < SimpleRecord::Base
   has_attributes 'merchant_username', 'merchant_password', 'merchant_fb_page', 'merchant_email', \
   'reset_code','merchant_salt','merchant_contact','merchant_name','merchant_paypal','merchant_address1', \
   'merchant_address2', 'merchant_city', 'merchant_state', 'merchant_postalcode', 'merchant_website', \
-  'merchant_country'
+  'merchant_country', 'merchant_id', 'merchant_inactive'
   
  
   alias_column 'email' => 'merchant_email'
@@ -31,6 +31,16 @@ class Merchant < SimpleRecord::Base
   
    def password
     @password
+  end
+  
+  def inactivate
+    self.merchant_inactive = "1"
+    self.save
+  end
+  
+  def activate
+    self.merchant_inactive = "0"
+    self.save
   end
   
   def save_account (account)

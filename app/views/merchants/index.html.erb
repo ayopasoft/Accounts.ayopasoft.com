@@ -16,6 +16,28 @@
 		$("#rebates_table").tablesorter({widthFixed: true, widgets: ['zebra']})
 					.tablesorterPager({container: $("#rebates_pager"), positionFixed: false});
 
+		$(".btn_end_auction").click(function(){
+			var answer = confirm("Are you sure you want to end this auction?")
+		    if (answer){
+				id = this.id;
+		        var url = "http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/end-auction?auctionID=" + id;
+
+				    $.getJSON(url + "&jsoncallback=?", function(data){
+				    
+					Auction = data.auction_id;
+
+				    if(Auction != "")
+				    {
+				     	window.location.reload();
+				    }
+				    else
+				    {
+				     
+				    }
+
+				   })
+		    }
+		});
 		
 	});
 </script>
@@ -51,45 +73,29 @@
 					</form>
 				</div>
 
-				<table id="auctions_table" class="tablesorter">
+				<table id="auctions_table" class="tablesorter" width="100%">
 					<thead>
 						<tr>
-							<th>Merchant Name</th>
-							<th>Purchasers</th>
-							<th>Current Rebate</th>
+							<th>Product</th>
+							<th>Buyers</th>
 							<th>Current Price</th>
-							<th><input type="button" value="End All Auctions" /></th>
+							<th>Rebate Due</th>
+							
+							<!--<th><input type="button" value="End All Auctions" /></th>-->
 						</tr>
 					</thead>
 					<tbody>
+						<% @auctions.each do |a| %>
 						<tr>
-							<td>Happy Jack Software</td>
-							<td>11255</td>
-							<td>$29</td>
-							<td>$554</td>
-							<td><input type="button" value="End Auction Early" /></td>
+							<td><%= a.product_name %></td>
+							<td><%= a.current_level %></td>
+							
+							<td><%=h number_to_currency a.current_price %></td>
+							<td>$</td>
+							<td><input type="button" class="btn_end_auction" id="<%= a.auction_id %>" value="End Auction Early" /></td>
 						</tr>
-						<tr>
-							<td>John Doe Industries</td>
-							<td>152</td>
-							<td>$23</td>
-							<td>$305</td>
-							<td><input type="button" value="End Auction Early" /></td>
-						</tr>
-						<tr>
-							<td>Widget Studios</td>
-							<td>564</td>
-							<td>$82</td>
-							<td>$322</td>
-							<td><input type="button" value="End Auction Early" /></td>
-						</tr>
-						<tr>
-							<td>Nother Company</td>
-							<td>882</td>
-							<td>$557</td>
-							<td>$5225</td>
-							<td><input type="button" value="End Auction Early" /></td>
-						</tr>
+						<% end %>
+						
 					</tbody>
 				</table>
 			</div>
@@ -111,7 +117,7 @@
 					</form>
 				</div>
 
-				<table id="details_table" class="tablesorter">
+				<table id="details_table" class="tablesorter" width="100%">
 					<thead>
 						<tr>
 							<th>Product</th>
@@ -123,38 +129,17 @@
 						</tr>
 					</thead>
 					<tbody>
+						<% @auctions.each do |a| %>
 						<tr>
-							<td>Happy Jack Software</td>
-							<td>$300</td>
-							<td>$290</td>
-							<td>$250</td>
-							<td>25</td>
-							<td>75</td>
+							<td><%= a.product_name %></td>
+							<td><%=h number_to_currency a.auction_startprice %></td>
+							<td><%=h number_to_currency a.current_price %></td>
+							<td><%=h number_to_currency a.lowest_price %></td>
+							<td><%= a.current_level %></td>
+							<td><%= a.lowest_level %></td>
 						</tr>
-						<tr>
-							<td>John Doe Industries</td>
-							<td>$720</td>
-							<td>$590</td>
-							<td>$350</td>
-							<td>23</td>
-							<td>95</td>
-						</tr>
-						<tr>
-							<td>Widget Studios</td>
-							<td>$600</td>
-							<td>$590</td>
-							<td>$450</td>
-							<td>84</td>
-							<td>250</td>
-						</tr>
-						<tr>
-							<td>Nother Company</td>
-							<td>$30</td>
-							<td>$28</td>
-							<td>$25</td>
-							<td>3</td>
-							<td>250</td>
-						</tr>
+						<% end %>
+						
 					</tbody>
 				</table>
 			</div>

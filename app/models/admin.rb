@@ -5,7 +5,7 @@ class Admin < SimpleRecord::Base
   include Alias::Legacy
   
   set_domain_name 'ayopa-admins'
-  has_attributes 'admin_email','admin_password','salt','reset_code'
+  has_attributes 'admin_email','admin_password','salt','reset_code','admin_inactive','admin_name'
    
   alias_column 'email' => 'admin_email'
   

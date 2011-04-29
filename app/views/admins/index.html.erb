@@ -5,14 +5,18 @@
 	 */
 
 	$(document).ready(function() {
+		
+		<% unless flash[:alert].blank? -%>
+			  jAlert('<%= flash[:alert] %>');
+			<% end -%>
 
 		$(".tabs").tabs();
 
 		$("#merchant_report_table").tablesorter({widthFixed: true, widgets: ['zebra']})
 					.tablesorterPager({container: $("#pager"), positionFixed: false});
 		
-		$("#report2_table").tablesorter({widthFixed: true, widgets: ['zebra']})
-					.tablesorterPager({container: $("#pager2"), positionFixed: false});
+		//$("#report2_table").tablesorter({widthFixed: true, widgets: ['zebra']})
+		//			.tablesorterPager({container: $("#pager2"), positionFixed: false});
 		
 		$("#auctions_table").tablesorter({widthFixed: true, widgets: ['zebra'], headers: {4:{sorter: false}}})
 					.tablesorterPager({container: $("#auctions_pager"), positionFixed: false});
@@ -22,7 +26,32 @@
 
 		$("#merchants_table").tablesorter({widthFixed: true, widgets: ['zebra']})
 					.tablesorterPager({container: $("#merchants_pager"), positionFixed: false});
+					
+		$("#admins_table").tablesorter({widthFixed: true, widgets: ['zebra']})
+					.tablesorterPager({container: $("#merchants_pager"), positionFixed: false});
+		
+		$(".btn_end_auction").click(function(){
+			var answer = confirm("Are you sure you want to end this auction?")
+		    if (answer){
+				id = this.id;
+		        var url = "http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/end-auction?auctionID=" + id;
 
+				    $.getJSON(url + "&jsoncallback=?", function(data){
+				    
+					Auction = data.auction_id;
+
+				    if(Auction != "")
+				    {
+				     	window.location.reload();
+				    }
+				    else
+				    {
+				     
+				    }
+
+				   })
+		    }
+		});
 	    
 	});
 </script>
@@ -33,12 +62,13 @@
 		<li><a href="#admin_auctions">Auctions</a></li>
 		<li><a href="#admin_rebates">Rebates</a></li>
 		<li><a href="#admin_merchants">Merchants</a></li>
+		<li><a href="#admin_admins">Admins</a></li>
 	</ul>
 	<div id="admin_reports">
 		<div class="tabs">
 			<ul>
 				<li><a href="#admin_reports_merchant">Merchants Report</a></li>
-				<li><a href="#admin_reports_report2">Report 2</a></li>
+				
 			</ul>
 			<div id="admin_reports_merchant">
 				<div id="pager" class="pager">
@@ -58,7 +88,7 @@
 					</form>
 				</div>
 				
-				<table id="merchant_report_table" class="tablesorter">
+				<table id="merchant_report_table" class="tablesorter" width="100%">
 					<thead>
 						<tr>
 							<th>Merchant Name</th>
@@ -67,84 +97,18 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>Happy Jack Software</td>
-							<td>Mona Gamboa</td>
-							<td>info@happyjacksoftware.com</td>
-						</tr>
-						<tr>
-							<td>John Doe Industries</td>
-							<td>John Doe</td>
-							<td>info@website.com</td>
-						</tr>
-						<tr>
-							<td>Widget Studios</td>
-							<td>Eric Despain</td>
-							<td>info@widgetstudios.com</td>
-						</tr>
-						<tr>
-							<td>Nother Company</td>
-							<td>Alice Nother</td>
-							<td>info@notherwebsite.com</td>
-						</tr>
+						<% @merchants.each do |m| %>
+							<tr>
+								<td><%=h m.merchant_name %></td>
+								<td><%=h m.merchant_contact %></td>
+								<td><%= mail_to m.merchant_email, nil, :subject => "Ayopa Account" %></td>
+							</tr>
+						<% end %>
+						
 					</tbody>
 				</table>
 			</div>
-			<div id="admin_reports_report2">
-				<div id="pager2" class="pager">
-					<form>
-						<img src="images/first.png" class="first"/>
-						<img src="images/prev.png" class="prev"/>
-						<input type="text" class="pagedisplay"/>
-						<img src="images/next.png" class="next"/>
-						<img src="images/last.png" class="last"/>
-						<select class="pagesize">
-							<option selected="selected"  value="10">10</option>
-
-							<option value="20">20</option>
-							<option value="30">30</option>
-							<option  value="40">40</option>
-						</select>
-					</form>
-				</div>
-				
-				<table id="report2_table" class="tablesorter">
-					<thead>
-						<tr>
-							<th>Merchant Name</th>
-							<th>Total Sales</th>
-							<th>Rebate Total</th>
-							<th>Complaints</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>Happy Jack Software</td>
-							<td>11255</td>
-							<td>$29312</td>
-							<td>554</td>
-						</tr>
-						<tr>
-							<td>John Doe Industries</td>
-							<td>152</td>
-							<td>$2332</td>
-							<td>35</td>
-						</tr>
-						<tr>
-							<td>Widget Studios</td>
-							<td>5564</td>
-							<td>$882</td>
-							<td>2</td>
-						</tr>
-						<tr>
-							<td>Nother Company</td>
-							<td>8982</td>
-							<td>$515557</td>
-							<td>225</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+		
 		</div>
 	</div>
 	<div id="admin_auctions">
@@ -165,45 +129,29 @@
 			</form>
 		</div>
 		
-		<table id="auctions_table" class="tablesorter">
+		<table id="auctions_table" class="tablesorter" width="100%">
 			<thead>
 				<tr>
-					<th>Merchant Name</th>
-					<th>Purchasers</th>
-					<th>Current Rebate</th>
+					<th>Merchant</th>
+					<th>Product</th>
+					<th>Buyers</th>
 					<th>Current Price</th>
-					<th><input type="button" value="End All Auctions" /></th>
+					<th>Rebate Due</th>
+					<!--<th><input type="button" value="End All Auctions" /></th>-->
 				</tr>
 			</thead>
 			<tbody>
+				<% @auctions.each do |a| %>
 				<tr>
-					<td>Happy Jack Software</td>
-					<td>11255</td>
-					<td>$29</td>
-					<td>$554</td>
-					<td><input type="button" value="End Auction Early" /></td>
+					<td><%=h a.merchant_name %></td>
+					<td><%=h a.product_name %></td>
+					<td><%=h a.current_level %></td>
+					<td><%=h number_to_currency a.current_price %></td>
+					<td>$</td>
+					<td><input type="button" class="btn_end_auction" id="<%= a.auction_id %>" value="End Auction Early" /></td>
 				</tr>
-				<tr>
-					<td>John Doe Industries</td>
-					<td>152</td>
-					<td>$23</td>
-					<td>$305</td>
-					<td><input type="button" value="End Auction Early" /></td>
-				</tr>
-				<tr>
-					<td>Widget Studios</td>
-					<td>564</td>
-					<td>$82</td>
-					<td>$322</td>
-					<td><input type="button" value="End Auction Early" /></td>
-				</tr>
-				<tr>
-					<td>Nother Company</td>
-					<td>882</td>
-					<td>$557</td>
-					<td>$5225</td>
-					<td><input type="button" value="End Auction Early" /></td>
-				</tr>
+				<% end %>
+				
 			</tbody>
 		</table>
 	</div>
@@ -234,26 +182,23 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td style="width:20%">Happy Jack Software</td>
-					<td style="width:20%">Best Software Suite</td>
-					<td>Check Sent<br /> <img src="images/check_sent.png" alt="2" /></td>
-				</tr>
-				<tr>
-					<td>John Doe Industries</td>
-					<td>Identity Security</td>
-					<td>Completed<br /> <img src="images/completed.png" alt="1" /></td>
-				</tr>
-				<tr>
-					<td>Widget Studios</td>
-					<td>Doodad</td>
-					<td>In Progress<br /> <img src="images/in_progress.png" alt="0" /></td>
-				</tr>
-				<tr>
-					<td>Nother Company</td>
-					<td>Nother Doodad</td>
-					<td>Completed<br /> <img src="images/completed.png" alt="1" /></td>
-				</tr>
+				<% @auctions.each do |a| %>
+							<tr>
+								<td style="width:20%"><%= a.merchant_name %></td>
+								<td style="width:20%"><%= a.product_name %></td>
+								
+								<td>
+									<% if a.rebate_sent == "1" %>
+										Check Sent<br /> <img src="images/check_sent.png" alt="2" />
+									<% elsif a.auction_expired  %>
+										Completed<br /> <img src="images/completed.png" alt="2" />
+									<% else %>
+										In Progress<br /> <img src="images/in_progress.png" alt="0" />
+									<% end %>
+								</td>
+								
+							</tr>
+				<% end %>
 			</tbody>
 		</table>
 	</div>
@@ -281,35 +226,39 @@
 			</form>
 		</div>
 		
-		<table id="merchants_table" class="tablesorter">
+		<table id="merchants_table" class="tablesorter" width="100%">
 			<thead>
 				<tr>
 					<th>Merchant Name</th>
-					<th>Products</th>
+					<th>Merchant Contact</th>
+					<th>Merchant Email</th>
 					<th></th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td style="width:20%">Happy Jack Software</td>
-					<td style="width:20%">Best Software Suite</td>
-					<td><input type="button" value="Inactivate" /></td>
-				</tr>
-				<tr>
-					<td>John Doe Industries</td>
-					<td>Identity Security</td>
-					<td><input type="button" value="Inactivate" /></td>
-				</tr>
-				<tr>
-					<td>Widget Studios</td>
-					<td>Doodad</td>
-					<td><input type="button" value="Inactivate" /></td>
-				</tr>
-				<tr>
-					<td>Nother Company</td>
-					<td>Nother Doodad</td>
-					<td><input type="button" value="Inactivate" /></td>
-				</tr>
+				<% @merchants.each do |m| %>
+					<tr>
+						<td style="width:20%"><%=h m.merchant_name %></td>
+						<td><%=h m.merchant_contact %></td>
+						<td><%= mail_to m.merchant_email, nil, :subject => "Ayopa Account" %></td>
+						<td>
+							<% if m.merchant_inactive == "1" %>
+							   <% form_for :merchant, :url => {:action => "activate_merchant"}  do |f| %>
+							   		<%= f.hidden_field :merchant_inactive, :value => "0" %>
+									<%= f.hidden_field :id, :value => m.id %>
+									<%= f.submit 'Activate', :id => m.id, :confirm => "Are you sure you want to activate " + m.merchant_name + "?" %>
+							   <% end %>
+							<% else %>
+								<% form_for :merchant, :url => {:action => "inactivate_merchant"}  do |f| %>
+							   		<%= f.hidden_field :merchant_inactive, :value => "1" %>
+									<%= f.hidden_field :id, :value => m.id %>
+									<%= f.submit 'Inactivate', :id => m.id, :confirm => "Are you sure you want to inactivate " + m.merchant_name + "?" %>
+							   <% end %>
+							<% end %>
+						</td>
+					</tr>
+				<% end %>
+				
 			</tbody>
 		</table>
 	</div>
@@ -341,4 +290,61 @@
 		<% end %>
 		</div>
     </div>
+	
+</div>
+<div id="admin_admins">
+	   <div class="tabs">
+	   	<ul>
+	   		<li><a href="#admins_current">Current</a></li>
+			<li><a href="#admins_new">New</a></li>
+	   	</ul>
+	   
+	   <div id="admins_current">
+ 		<table id="admins_table" class="tablesorter" width="100%">
+			<thead>
+				<tr>
+					<th>Admin Name</th>
+					<th>Email</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @admins.each do |a| %>
+					<tr>
+						<td style="width:20%"><%=h a.admin_name %></td>
+						<td style="width:20%"><%=h a.admin_email %></td>
+						<td>
+							<% if a.admin_inactive == "1" %>
+								<% form_for(a)  do |f| %>
+									<%= f.hidden_field :admin_inactive, :value => "0" %>
+									<%= f.hidden_field :id %>
+									<%= f.submit 'Activate', :id => a.id, :confirm => "Are you sure you want to activate this user?" %><% end %>
+							<% else %>
+								<% form_for(a)  do |f| %>
+									<%= f.hidden_field :admin_inactive, :value => "1" %>
+									<%= f.hidden_field :id %>
+									<%= f.submit 'Inactivate', :id => a.id, :confirm => "Are you sure you want to activate this user?" %><% end %>
+							<% end %>
+						</td>
+					</tr>
+				<% end %>
+				
+			</tbody>
+		</table>
+		
+	</div>
+	
+	<div id="admins_new">
+			<% form_for :admin, 
+					:url => { :action => :new_admin } do |f| %>
+			<div style="width:130px; float:left; clear:both">Admin Name:</div>
+					<%= f.text_field :admin_name, :size => 35 %> <br /><br />
+				<div style="width:130px; float:left; clear:both">Admin Email:</div>
+					<%= f.text_field :admin_email, :size => 35 %> <br /><br />
+				
+					<%= image_submit_tag '/images/save.png' %>
+		<% end %>
+	</div>
+	
+  </div>
 </div>

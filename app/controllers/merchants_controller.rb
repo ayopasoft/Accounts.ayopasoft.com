@@ -1,3 +1,5 @@
+require 'time'
+
 class MerchantsController < ApplicationController
   layout 'template'
   
@@ -7,6 +9,22 @@ class MerchantsController < ApplicationController
   # GET /merchants.xml
   def index
     @merchant = Merchant.find(session[:user_id])
+    
+    @auctions = Auction.find(:all, :conditions => ["`merchant_id` = ? and auction_start <= ? and auction_end >= ? and auction_ended != ? and auction_deleted != ?",@merchant.merchant_id, Time.now.iso8601, Time.now.iso8601, "1", "1"], :order => "auction_start desc")
+    
+    @auctions.each do |a|
+      url = URI.parse('http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/current-auction-info')
+      post_args1 = {'auctionID' => a.auction_id}
+      resp, data = Net::HTTP.post_form(url, post_args1)
+      result = JSON.parse(data)
+      
+      a.current_price = result['current_price']  
+      a.current_level = result['current_level']
+      a.next_price = result['next_price']
+      a.next_level = result['next_level']
+      a.lowest_price = result['lowest_price']
+      a.lowest_level = result['lowest_level']
+    end
 
     respond_to do |format|
       format.html # index.html.erb

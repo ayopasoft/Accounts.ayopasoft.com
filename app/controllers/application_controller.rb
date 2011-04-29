@@ -31,13 +31,13 @@ class ApplicationController < ActionController::Base
   end
   
   def merchant_authorize
-    if ( cookies[:remember_me] and cookies[:remember_me] and Merchant.find( cookies[:remember_me]) and Digest::SHA1.hexdigest( Merchant.find( cookies[:remember_me] ).email )[4,18] == cookies[:remember_me_code]  )  
+    if ( cookies[:remember_me] and cookies[:remember_me] and Merchant.find( cookies[:remember_me]) and Digest::SHA1.hexdigest( Merchant.find( cookies[:remember_me] ).email )[4,18] == cookies[:remember_me_code])  
           @u = Merchant.find( cookies[:remember_me_id] )  
           session[:user_id] = @u.id  
           session[:user_type] = "merchant"
           session[:user_name] = @u.merchant_name
       end  
-    unless !session[:user_id].nil? && Merchant.find_by_id(session[:user_id])
+    unless !session[:user_id].nil? && Merchant.find_by_id(session[:user_id]) && Merchant.find(session[:user_id]).merchant_inactive != "1"
       flash[:notice] = "Please Log In"
       redirect_to :controller => 'login', :action => 'login'
     end
@@ -50,7 +50,7 @@ class ApplicationController < ActionController::Base
           session[:user_type] = "admin"
           session[:user_name] = "ADMIN"
     end  
-    unless !session[:user_id].nil? && Admin.find_by_id(session[:user_id])
+    unless !session[:user_id].nil? && Admin.find_by_id(session[:user_id]) && Admin.find(session[:user_id]).admin_inactive != "1"
       flash[:notice] = "Please Log In"
       redirect_to :controller => 'login', :action => 'login'
     end
