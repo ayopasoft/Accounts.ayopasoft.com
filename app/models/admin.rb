@@ -29,13 +29,18 @@ class Admin < SimpleRecord::Base
     @password
   end
   
-  
+  def password=(pwd)
+    @password = pwd
+    return if pwd.blank?
+    create_new_salt
+    self.admin_password = Admin.encrypted_password(self.password, self.salt)
+  end
     
   def set_password (password, password_confirmation)
     errors.add('Passwords', 'do not match') unless password_confirmation == password
-    create_new_salt
-    hashed_password = Admin.encrypted_password(password, self.salt)
-    self.admin_password = hashed_password
+    #create_new_salt
+    #hashed_password = Admin.encrypted_password(password, self.salt)
+    self.password = password
     self.save
   end
   

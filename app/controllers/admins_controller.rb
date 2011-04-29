@@ -26,6 +26,21 @@ class AdminsController < ApplicationController
      end
   end
   
+  def set_password
+    if !params[:admin][:password].blank? && !params[:admin][:password_confirmation].blank? && params[:admin][:password] == params[:admin][:password_confirmation]
+      user = Admin.find(params[:admin][:id])
+      if user
+        user.set_password(params[:admin][:password], params[:admin][:password_confirmation])
+        flash[:alert] = "Password has been set"
+      else
+        flash[:alert] = "Password cannot be set at this time"
+      end
+    else
+      flash[:alert] = "Password/Password confirmation blank or passwords do not match"
+    end
+    redirect_to :controller => "admins", :action => "index"
+  end
+  
   def new_merchant
       if params[:admin][:email].blank?
         flash[:alert] = "You must enter an email address"
