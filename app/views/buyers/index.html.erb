@@ -22,6 +22,7 @@
 	<ul>
 		<li><a href="#consumer_reports">Reports</a></li>
 		<li><a href="#consumer_info">Rebate Setup</a></li>
+		<li><a href="#consumer_account">Account</a></li>
 	</ul>
 	
 	<div id="consumer_reports">
@@ -29,6 +30,7 @@
 			<ul>
 				<li><a href="#consumer_auctions">My Auctions</a></li>
 				<li><a href="#consumer_status">Rebate Status</a></li>
+				
 			</ul>
 			
 			<div id="consumer_auctions">
@@ -156,5 +158,27 @@
 		<% end %>
 		<div class="clear"></div>
 		
+		
+		
 	</div>
+	<div id="consumer_account">
+		<div class="tabs">
+			<ul>
+				<li><a href="#consumer_password">Password</a></li>
+			</ul>
+			<div id="consumer_password">
+				<% form_for :buyer, :url => {:action => "set_password"} do |f| %>
+				    
+					<div style="width:150px; float:left; clear:both">Password:</div>
+					<%= f.password_field :password, :size => 35 %> <br /><br />
+					<div style="width:150px; float:left; clear:both">Password Confirm:</div>
+					<%= f.password_field :password_confirmation, :size => 35 %> <br />
+					<%= image_submit_tag '/images/save.png' %>
+					<%= f.hidden_field :id, :value => session[:user_id] %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+	
+	
 </div>

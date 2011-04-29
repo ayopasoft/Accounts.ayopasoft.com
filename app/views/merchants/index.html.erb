@@ -241,6 +241,7 @@
 			</div>
 			<div id="merchant_set_password">
 				<% form_for :merchant, :url => {:action => "set_password"} do |f| %>
+				    <p>Note: Remember to change your Ayopa password in your shopping cart console.</p>
 					<div style="width:150px; float:left; clear:both">Password:</div>
 					<%= f.password_field :password, :size => 35 %> <br /><br />
 					<div style="width:150px; float:left; clear:both">Password Confirm:</div>

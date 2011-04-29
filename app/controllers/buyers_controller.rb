@@ -50,6 +50,21 @@ class BuyersController < ApplicationController
     end
   end
   
+  def set_password
+    if !params[:buyer][:password].blank? && !params[:buyer][:password_confirmation].blank? && params[:buyer][:password] == params[:buyer][:password_confirmation]
+      user = Buyer.find(params[:buyer][:id])
+      if user
+        user.set_password(params[:buyer][:password], params[:buyer][:password_confirmation])
+        flash[:alert] = "Password has been set"
+      else
+        flash[:alert] = "Password cannot be set at this time"
+      end
+    else
+      flash[:alert] = "Password/Password confirmation blank or passwords do not match"
+    end
+    redirect_to :controller => "buyers", :action => "index"
+  end
+  
   def update
     @buyer = Buyer.find(session[:user_id])
 

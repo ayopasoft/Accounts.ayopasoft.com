@@ -30,6 +30,13 @@ class Buyer < SimpleRecord::Base
    def password
     @password
    end
+   
+   def password=(pwd)
+    @password = pwd
+    return if pwd.blank?
+    create_new_salt
+    self.buyer_password = Buyer.encrypted_password(self.password, self.salt)
+  end
   
   def save_account (account)
     name = account[:first_name] + " " + account[:last_name]
@@ -42,10 +49,10 @@ class Buyer < SimpleRecord::Base
   end
   
   def set_password (password, password_confirmation)
-    errors.add('Passwords', 'do not match') unless password_confirmation == password
-    create_new_salt
-    hashed_password = Buyer.encrypted_password(password, self.buyer_salt)
-    self.buyer_password = hashed_password
+    #errors.add('Passwords', 'do not match') unless password_confirmation == password
+    #create_new_salt
+    #hashed_password = Buyer.encrypted_password(password, self.buyer_salt)
+    self.password = password
     self.save
   end
   
