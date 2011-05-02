@@ -24,6 +24,9 @@ class MerchantsController < ApplicationController
       a.next_level = result['next_level']
       a.lowest_price = result['lowest_price']
       a.lowest_level = result['lowest_level']
+      a.rebate_total = result['rebate_total']
+      a.commission_total = result['commission_total']
+      a.auction_total = result['auction_total']
     end
 
     respond_to do |format|

@@ -138,6 +138,8 @@
 					<th>Buyers</th>
 					<th>Current Price</th>
 					<th>Rebate Due</th>
+					<th>Commission Due</th>
+					<th>Total Due</th>
 					<!--<th><input type="button" value="End All Auctions" /></th>-->
 				</tr>
 			</thead>
@@ -148,7 +150,9 @@
 					<td><%=h a.product_name %></td>
 					<td><%=h a.current_level %></td>
 					<td><%=h number_to_currency a.current_price %></td>
-					<td>$</td>
+					<td><%=h number_to_currency a.rebate_total %></td>
+					<td><%=h number_to_currency a.commission_total %></td>
+					<td><%=h number_to_currency a.auction_total %></td>
 					<td><input type="button" class="btn_end_auction" id="<%= a.auction_id %>" value="End Auction Early" /></td>
 				</tr>
 				<% end %>
