@@ -81,9 +81,10 @@ class MerchantsController < ApplicationController
   # POST /merchants.xml
   def create
     @merchant = Merchant.new(params[:merchant])
-
+    
     respond_to do |format|
       if @merchant.save
+        
         format.html { redirect_to(@merchant, :notice => 'Merchant was successfully created.') }
         format.xml  { render :xml => @merchant, :status => :created, :location => @merchant }
       else

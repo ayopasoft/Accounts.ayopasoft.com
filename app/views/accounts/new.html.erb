@@ -38,6 +38,19 @@
 				'padding' : '0',
 				'overlayColor' : '#000000'
 			});
+			
+			$('#account_partner').click(function() {
+    				$("#txtPaypal").toggle(this.checked);
+					$("#txtCompany").toggle(this.checked);
+					$("#txtWebsite").toggle(this.checked);
+			});
+			
+			$('#account_partner').is(':checked') ? $("#txtPaypal").show() : $("#txtPaypal").hide();
+			$('#account_partner').is(':checked') ? $("#txtCompany").show() : $("#txtCompany").hide();
+			$('#account_partner').is(':checked') ? $("#txtWebsite").show() : $("#txtWebsite").hide();
+
+
+			
 		});
 	</script>
 	<style type="text/css">
@@ -80,9 +93,15 @@
 										<%= f.check_box :partner %> I want to become a partner <a class="partnerHelp">(?)</a>
 										
 										<br/><br/>
+										<div id="txtCompany" style="display:none"><span class="required">*</span>Company Name:<br/><%= f.text_field :company_name, :size => 30 %><br /></div>​
+										<div id="txtWebsite" style="display:none"><span class="required">*</span>Company Website:<br/><%= f.text_field :website, :size => 30 %><br /></div>​
+										
+										<div id="txtPaypal" style="display:none"><span class="required">*</span>PayPal Email:<br/><%= f.text_field :paypal, :size => 30 %><br /><br /></div>​
+										
 										<span class="required">*</span>Password:<br/>
 										<%= f.password_field :user_password, :size => 30 %>
 										<br/><br/>
+										
 										<span class="required">*</span>Confirm Password:<br/>
 										<%= f.password_field :user_password_confirmation, :size => 30 %>
 										<br /><br />

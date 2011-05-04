@@ -57,6 +57,9 @@ class Merchant < SimpleRecord::Base
     hashed_password = Merchant.encrypted_password(account[:user_password], self.salt)
     self.merchant_password = hashed_password
     self.email = account[:user_email]
+    self.merchant_paypal = account[:paypal]
+    self.merchant_name = account[:company_name]
+    self.merchant_website = account[:website]
     self.save
   end
     

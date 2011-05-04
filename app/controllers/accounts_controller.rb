@@ -54,6 +54,7 @@ class AccountsController < ApplicationController
         
           if params[:account][:partner] == "1"
                   user = Merchant.new
+                  user.merchant_inactive = 1
                   user.save_account(params[:account])
           else
               user = Buyer.find(:first, :conditions => ['`buyer_email` = ?', params[:account][:user_email]])

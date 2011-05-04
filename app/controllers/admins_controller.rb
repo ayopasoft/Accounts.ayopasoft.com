@@ -8,11 +8,11 @@ class AdminsController < ApplicationController
   before_filter :admin_authorize
   
   def new_admin
-    if params[:admin][:email].blank?
+    if params[:admin][:admin_email].blank?
         flash[:alert] = "You must enter an email address"
         redirect_to :controller => 'admins', :action => 'index'
       else
-        user = User.lookup_by_email(params[:admin][:email])
+        user = User.lookup_by_email(params[:admin][:admin_email])
         if user
           flash[:alert] = "This email is already registered with Ayopa"
           redirect_to :controller => 'admins', :action => 'index'
@@ -104,7 +104,6 @@ class AdminsController < ApplicationController
       a.rebate_total = result['rebate_total']
       a.commission_total = result['commission_total']
       a.auction_total = result['auction_total']
-      
       if a.auction_end < Time.now.iso8601 
         a.auction_expired = 1
       end
