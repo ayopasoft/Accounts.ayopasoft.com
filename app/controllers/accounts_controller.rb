@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  layout 'login'
+  layout 'template'
   
   
   def terms_text
