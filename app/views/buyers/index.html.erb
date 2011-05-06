@@ -23,6 +23,7 @@
 		<li><a href="#consumer_reports">Reports</a></li>
 		<li><a href="#consumer_info">Rebate Setup</a></li>
 		<li><a href="#consumer_account">Account</a></li>
+		<li><a href="#consumer_plugins">Plugins</a></li>
 	</ul>
 	
 	<div id="consumer_reports">
@@ -139,10 +140,13 @@
 	
 	<div id="consumer_info">
 		<% form_for(@buyer) do |f| %>
-		Enter the address you want your rebate check to be sent to.<br /><br />
-		<div style="width:100px; float:left">Address (1):</div>
-		<%= f.text_field :buyer_address1, :size => 35 %>
+		Enter your PayPal address to receive your rebate payments. If left blank, rebates will be sent to your Facebook email.<br /><br />
+		<div style="width:100px; float:left">PayPal Email:</div>
+		<%= f.text_field :buyer_paypal, :size => 35 %>
 		
+		<!--<br /><br />
+		<div style="width:100px; float:left; clear:both">Address (1):</div>
+		<%= f.text_field :buyer_address1, :size => 35 %>
 		<br /><br />
 	    <div style="width:100px; float:left; clear:both">Address (2):</div>
 		<%= f.text_field :buyer_address2, :size => 35 %>
@@ -153,7 +157,7 @@
 	    <div style="width:170px; float:left; clear:both"><span style="width:100px; display:block; float:left">State:</span>
 		<%= f.text_field :buyer_state, :size => 3 %></div>
 	    <div style="width:120px; float:left;">Zip: 
-		<%= f.text_field :buyer_zip, :size => 5 %></div><br /><br />
+		<%= f.text_field :buyer_zip, :size => 5 %></div><br /><br />-->
 		<%= image_submit_tag '/images/save.png', :id => session[:user_id] %>
 		<% end %>
 		<div class="clear"></div>
@@ -179,6 +183,15 @@
 			</div>
 		</div>
 	</div>
-	
+	<div id="consumer_plugins">
+		<a href="http://www.facebook.com/apps/application.php?id=120882414650116" target="_blank"><img src="http://ayopa-resources.s3.amazonaws.com/images/install_facebook_app.png"></a>
+		<ol>
+			<li>Click the "Go To App" button from the Facebook application page.</li>
+			<li>Accept to grant permissions if prompted.</li>
+			<li>View your current auctions, rebate status, and other Ayopa auctions.</li>
+			<li>The Ayopa app will be added to your apps on your Facebook profile for easy access.</li>
+			
+		</ol>
+	</div>
 	
 </div>

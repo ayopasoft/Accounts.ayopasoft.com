@@ -6,7 +6,9 @@ class Buyer < SimpleRecord::Base
   include Alias::Legacy
   
   set_domain_name 'ayopa-buyers'
-  has_attributes 'buyer_id','buyer_email', 'buyer_name', 'buyer_address1', 'buyer_address2','buyer_city', 'buyer_state', 'buyer_zip', 'buyer_country', 'buyer_password', 'buyer_salt', 'reset_code'
+  has_attributes 'buyer_id','buyer_email', 'buyer_name', 'buyer_address1', 'buyer_address2','buyer_city', \
+                 'buyer_state', 'buyer_zip', 'buyer_country', 'buyer_password', 'buyer_salt', 'reset_code', \
+                 'buyer_paypal'
   
   alias_column 'email' => 'buyer_email'
    alias_column 'salt' => 'buyer_salt'
