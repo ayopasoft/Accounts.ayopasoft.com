@@ -44,7 +44,7 @@ class LoginController < ApplicationController
     session[:user_name] = nil
     if cookies[:remember_me_id] then cookies.delete :remember_me_id end  
     if cookies[:remember_me_code] then cookies.delete :remember_me_code end 
-    redirect_to("http://dev.ayopasoft.com")
+    redirect_to("http://www.ayopasoft.com")
   end
 
 def forgot_password
