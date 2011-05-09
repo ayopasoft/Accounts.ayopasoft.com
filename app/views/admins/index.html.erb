@@ -34,7 +34,7 @@
 			var answer = confirm("Are you sure you want to end this auction?")
 		    if (answer){
 				id = this.id;
-		        var url = "http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/end-auction?auctionID=" + id;
+		        var url = "http://beta.ayopasoft.com/AyopaServer/end-auction?auctionID=" + id;
 
 				    $.getJSON(url + "&jsoncallback=?", function(data){
 				    
