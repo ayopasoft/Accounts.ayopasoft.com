@@ -24,7 +24,7 @@ class BuyersController < ApplicationController
       p.lowest_price = result['lowest_price']
       p.lowest_level = result['lowest_level']
       
-      p.savings = p.purchase_price.to_f - p.current_price.to_f
+      p.savings = (p.purchase_price.to_f - p.current_price.to_f) * p.purchase_quantity.to_f
       
       @auction = Auction.find_by_auction_id(p.purchase_auction_id)
       
