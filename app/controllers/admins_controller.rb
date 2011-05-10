@@ -74,6 +74,7 @@ class AdminsController < ApplicationController
     user = Merchant.find(params[:merchant][:id])
      if user
        user.activate
+       Mailer.deliver_approve_merchant_account user
      end
      redirect_to :controller => 'admins', :action => 'index'
   end

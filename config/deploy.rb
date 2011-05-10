@@ -15,6 +15,8 @@ set :deploy_via, :export
 case stage
 when "dev"
   set :user, username
+  set :application, "dev.accounts.ayopasoft.com"
+  set :deploy_to, "/usr/local/rails/#{application}"
   role :app, "dev.accounts.ayopasoft.com"
   role :web, "dev.accounts.ayopasoft.com"
   role :db,  "dev.accounts.ayopasoft.com", :primary => true 
@@ -23,6 +25,8 @@ when "dev"
   set :use_sqlite3, true
 when "prod"
   set :user, username
+  set :application, "accounts.ayopasoft.com"
+  set :deploy_to, "/usr/local/rails/#{application}"
   role :app, "accounts.ayopasoft.com"
   role :web, "accounts.ayopasoft.com"
   role :db,  "accounts.ayopasoft.com", :primary => true  

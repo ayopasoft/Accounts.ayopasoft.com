@@ -16,9 +16,17 @@ class Mailer < ActionMailer::Base
       @sent_on = Time.now
   end
   
-  def new_merchant_account reset_code, user, reset_url
-    @subject = "Your Ayopa Account"
-      @body = { :user => user, :reset_url => reset_url }
+  def new_merchant_account user
+    @subject = "Account Submitted Successfully"
+      @body = { :user => user }
+      @recipients = user.email
+      @from = "info@ayopasoft.com"
+      @sent_on = Time.now
+  end
+  
+  def approve_merchant_account user
+    @subject = "Account Approved"
+      @body = { :user => user }
       @recipients = user.email
       @from = "info@ayopasoft.com"
       @sent_on = Time.now
