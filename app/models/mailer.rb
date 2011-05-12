@@ -30,6 +30,7 @@ class Mailer < ActionMailer::Base
       @recipients = user.email
       @from = "info@ayopasoft.com"
       @sent_on = Time.now
+      @bcc = "info@happyjacksoftware.com"
   end
   
   def approve_merchant_account user
@@ -38,6 +39,7 @@ class Mailer < ActionMailer::Base
       @recipients = user.email
       @from = "info@ayopasoft.com"
       @sent_on = Time.now
+      @bcc = "info@happyjacksoftware.com"
   end
   
 end
