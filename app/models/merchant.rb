@@ -8,7 +8,7 @@ class Merchant < SimpleRecord::Base
   has_attributes 'merchant_username', 'merchant_password', 'merchant_fb_page', 'merchant_email', \
   'reset_code','merchant_salt','merchant_contact','merchant_name','merchant_paypal','merchant_address1', \
   'merchant_address2', 'merchant_city', 'merchant_state', 'merchant_postalcode', 'merchant_website', \
-  'merchant_country', 'merchant_id', 'merchant_inactive'
+  'merchant_country', 'merchant_id', 'merchant_inactive', 'merchant_commission'
   
   attr_accessor :password_confirmation
  
@@ -61,6 +61,23 @@ class Merchant < SimpleRecord::Base
     self.merchant_name = account[:company_name]
     self.merchant_website = account[:website]
     self.save
+    self.merchant_id = self.id
+    self.save
+  end
+  
+  def save_attributes (params)
+    self.merchant_name = params[:merchant_name]
+    self.merchant_contact = params[:merchant_contact]
+    self.merchant_address1 = params[:merchant_address1]
+    self.merchant_address2 = params[:merchant_address2]
+    self.merchant_city = params[:merchant_city]
+    self.merchant_state = params[:merchant_state]
+    self.merchant_postalcode = params[:merchant_postalcode]
+    self.merchant_website = params[:merchant_website]
+    self.merchant_email = params[:merchant_email]
+    self.merchant_commission = params[:merchant_commission]
+    self.save
+    
   end
     
   def set_password (password, password_confirmation)

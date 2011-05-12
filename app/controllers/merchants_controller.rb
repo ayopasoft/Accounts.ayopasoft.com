@@ -13,7 +13,7 @@ class MerchantsController < ApplicationController
     @auctions = Auction.find(:all, :conditions => ["`merchant_id` = ? and auction_start <= ? and auction_end >= ? and auction_ended != ? and auction_deleted != ?",@merchant.merchant_id, Time.now.iso8601, Time.now.iso8601, "1", "1"], :order => "auction_start desc")
     
     @auctions.each do |a|
-      url = URI.parse('http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/current-auction-info')
+      url = URI.parse('http://beta.ayopasoft.com/AyopaServer/current-auction-info')
       post_args1 = {'auctionID' => a.auction_id}
       resp, data = Net::HTTP.post_form(url, post_args1)
       result = JSON.parse(data)
@@ -82,8 +82,11 @@ class MerchantsController < ApplicationController
   def create
     @merchant = Merchant.new(params[:merchant])
     
+    
     respond_to do |format|
       if @merchant.save
+        params[:merchant][:merchant_id] = @merchant.id
+        @merchant.update_attributes(params[:merchant])
         
         format.html { redirect_to(@merchant, :notice => 'Merchant was successfully created.') }
         format.xml  { render :xml => @merchant, :status => :created, :location => @merchant }

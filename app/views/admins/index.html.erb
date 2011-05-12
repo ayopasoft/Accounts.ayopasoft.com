@@ -237,15 +237,17 @@
 					<th>Merchant Name</th>
 					<th>Merchant Contact</th>
 					<th>Merchant Email</th>
+					<th>Commission %</th>
 					<th></th>
 				</tr>
 			</thead>
 			<tbody>
 				<% @merchants.each do |m| %>
 					<tr>
-						<td style="width:20%"><%=h m.merchant_name %></td>
+						<td style="width:20%"><%= link_to m.merchant_name, :controller => "admins", :action => "edit_merchant", :id => m.merchant_id  %></td>
 						<td><%=h m.merchant_contact %></td>
 						<td><%= mail_to m.merchant_email, nil, :subject => "Ayopa Account" %></td>
+						<td><%=h m.merchant_commission %></td>
 						<td>
 							<% if m.merchant_inactive == "1" %>
 							   <% form_for :merchant, :url => {:action => "activate_merchant"}  do |f| %>
@@ -273,6 +275,7 @@
 					:url => { :action => :new_merchant } do |f| %>
 			<div style="width:130px; float:left; clear:both">Company Name:</div>
 					<%= f.text_field :merchant_name, :size => 35 %> <br /><br />
+			
 				<div style="width:130px; float:left; clear:both">Contact Name:</div>
 					<%= f.text_field :merchant_contact, :size => 35 %> <br /><br />
 				<div style="width:130px; float:left; clear:both">Address (1):</div>
@@ -290,7 +293,9 @@
 		<div style="width:130px; float:left; clear:both">Website:</div>
 					<%= f.text_field :merchant_website, :size => 69 %> <br /><br />
 		<div style="width:130px; float:left; clear:both">Email:</div>
-					<%= f.text_field :email, :size => 69 %> <br /><br />
+					<%= f.text_field :merchant_email, :size => 69 %> <br /><br />
+		<div style="width:130px; float:left; clear:both">Commission %:</div>
+					<%= f.text_field :merchant_commission, :size => 3 %> <br /><br />
 					<%= image_submit_tag '/images/save.png', :id => session[:user_id] %>
 		<% end %>
 		</div>

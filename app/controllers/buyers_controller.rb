@@ -12,7 +12,7 @@ class BuyersController < ApplicationController
     @purchases = Purchase.find(:all, :conditions => ["`purchase_buyer_id` = ?", @buyer.buyer_id], :order => "purchase_date desc")
     
     @purchases.each do |p|
-      url = URI.parse('http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/current-auction-info')
+      url = URI.parse('http://beta.ayopasoft.com/AyopaServer/current-auction-info')
       post_args1 = {'auctionID' => p.purchase_auction_id}
       resp, data = Net::HTTP.post_form(url, post_args1)
       result = JSON.parse(data)

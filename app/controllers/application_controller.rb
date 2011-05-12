@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
           session[:user_type] = "merchant"
           session[:user_name] = @u.merchant_name
       end  
-    unless !session[:user_id].nil? && Merchant.find_by_id(session[:user_id]) && Merchant.find(session[:user_id]).merchant_inactive != "1"
+    unless !session[:user_id].nil? && (Merchant.find_by_id(session[:user_id]) && Merchant.find(session[:user_id]).merchant_inactive != "1" || Admin.find_by_id(session[:user_id])) 
       flash[:notice] = "Please Log In"
       redirect_to :controller => 'login', :action => 'login'
     end

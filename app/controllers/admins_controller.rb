@@ -42,19 +42,21 @@ class AdminsController < ApplicationController
   end
   
   def new_merchant
-      if params[:admin][:email].blank?
+      if params[:admin][:merchant_email].blank?
         flash[:alert] = "You must enter an email address"
         redirect_to :controller => 'admins', :action => 'index'
       else
       
-      user = User.lookup_by_email(params[:admin][:email])
+      user = User.lookup_by_email(params[:admin][:merchant_email])
         if user
           flash[:alert] = "This email is already registered with Ayopa"
           redirect_to :controller => 'admins', :action => 'index'
         else
            @user = Merchant.create(params[:admin])
+           params[:admin][:merchant_id] = @user.id
+           @user.update_attributes(params[:admin])
            reset_code = @user.set_reset_code
-           Mailer.deliver_new_merchant_account reset_code, @user, (reset_password_url :reset_code => reset_code)
+           Mailer.deliver_create_merchant_account reset_code, @user, (reset_password_url :reset_code => reset_code)
           flash[:alert] = "Email sent to #{@user.email}"
           redirect_to :controller => 'admins', :action => 'index'
         end
@@ -79,6 +81,18 @@ class AdminsController < ApplicationController
      redirect_to :controller => 'admins', :action => 'index'
   end
   
+    # GET /admins/1/edit
+  def edit_merchant
+    @merchant = Merchant.find(params[:id])
+    if request.post?
+      user = Merchant.find(params[:admin][:merchant_id])
+      if user
+        user.save_attributes(params[:admin])
+        flash[:alert] = "Merchant changes saved"
+        redirect_to :controller => 'admins', :action => 'index'
+      end
+    end
+  end
   
   # GET /admins
   # GET /admins.xml
@@ -91,7 +105,7 @@ class AdminsController < ApplicationController
     @auctions = Auction.find(:all, :conditions => ["auction_start <= ? and auction_end >= ? and auction_ended != ? and auction_deleted != ?", Time.now.iso8601, Time.now.iso8601, "1", "1"], :order => "auction_start desc")
     
     @auctions.each do |a|
-      url = URI.parse('http://ayopa1dev.happyjacksoftware.com:8080/AyopaServer/current-auction-info')
+      url = URI.parse('http://beta.ayopasoft.com/AyopaServer/current-auction-info')
       post_args1 = {'auctionID' => a.auction_id}
       resp, data = Net::HTTP.post_form(url, post_args1)
       result = JSON.parse(data)
@@ -143,6 +157,8 @@ class AdminsController < ApplicationController
   def edit
     @admin = Admin.find(params[:id])
   end
+  
+ 
 
   # POST /admins
   # POST /admins.xml
