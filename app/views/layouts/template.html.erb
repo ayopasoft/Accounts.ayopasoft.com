@@ -21,15 +21,6 @@
 	<link href="/stylesheets/themes/blue/style.css" rel="stylesheet" type="text/css" media="screen" />
 	<link rel="stylesheet" href="/stylesheets/jquery-ui.css" type="text/css" media="all" />
 	
-	<script language="javascript">
-		$(document).ready(function() {
-			
-			<% unless flash[:alert].blank? -%>
-			  jAlert('<%= flash[:alert] %>');
-			<% end -%>
-			
-		});
-	</script>
 	
 	<%= yield :head %>
 	

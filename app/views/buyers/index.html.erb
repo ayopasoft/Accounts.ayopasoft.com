@@ -5,7 +5,10 @@
 	 */
 
 	$(document).ready(function() {
-
+		<% unless flash[:alert].blank? -%>
+			  jAlert('<%= flash[:alert] %>');
+			<% end -%>
+			
 		$(".tabs").tabs();
 
 		$("#rebates_table").tablesorter({widthFixed: true, widgets: ['zebra']})

@@ -5,6 +5,11 @@
 	 */
 
 	$(document).ready(function() {
+		
+		<% unless flash[:alert].blank? -%>
+			  jAlert('<%= flash[:alert] %>');
+			<% end -%>
+			
 		$(".tabs").tabs();
 
 		$("#auctions_table").tablesorter({widthFixed: true, widgets: ['zebra'], headers: {4:{sorter: false}}})
