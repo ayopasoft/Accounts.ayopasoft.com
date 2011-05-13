@@ -133,7 +133,9 @@ hr{
 	float:left;
 }
 
-.roundedCorners2{
+.roundedCorners{
+	float:left;
+	width:999px;
 	-moz-border-radius: 14px;
 	-webkit-border-radius: 14px;
 	border-radius: 14px;
@@ -148,27 +150,9 @@ hr{
 	margin-bottom:10px;
 }
 
-.roundedCorners{
-	-moz-border-radius: 14px;
-	-webkit-border-radius: 14px;
-	border-radius: 14px;
-	-webkit-box-shadow: 3px 3px 10px #27341d;
-	-moz-box-shadow: 3px 3px 10px #27341d;
-	box-shadow: 3px 3px 10px #27341d;
-	
-	
-	behavior: url(/ie-css3.htc);
-	border:1px solid #fff;
-	background:#fff repeat-x;
-	background-image:url(../images/box_gradient.png);
-	
-	
-	
-	padding:20px;
-	margin-bottom:10px;
-}
-
 .short_roundedCorners{
+	float:left;
+	width:999px;
 	-moz-border-radius: 14px;
 	-webkit-border-radius: 14px;
 	border-radius: 14px;
