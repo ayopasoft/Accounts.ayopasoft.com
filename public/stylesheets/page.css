@@ -133,7 +133,7 @@ hr{
 	float:left;
 }
 
-.roundedCorners{
+.roundedCorners2{
 	-moz-border-radius: 14px;
 	-webkit-border-radius: 14px;
 	border-radius: 14px;
@@ -142,8 +142,27 @@ hr{
 	box-shadow: 3px 3px 10px #27341d;
 	behavior: url(/ie-css3.htc);
 	border:0px solid #64BC27;
-	/*background:url(../images/white_transparent_bg.png) transparent;*/
 	background:#ffffff;
+	
+	padding:20px;
+	margin-bottom:10px;
+}
+
+.roundedCorners{
+	-moz-border-radius: 14px;
+	-webkit-border-radius: 14px;
+	border-radius: 14px;
+	-webkit-box-shadow: 3px 3px 10px #27341d;
+	-moz-box-shadow: 3px 3px 10px #27341d;
+	box-shadow: 3px 3px 10px #27341d;
+	
+	
+	behavior: url(/ie-css3.htc);
+	border:1px solid #fff;
+	background:#fff repeat-x;
+	background-image:url(../images/box_gradient.png);
+	
+	
 	
 	padding:20px;
 	margin-bottom:10px;
