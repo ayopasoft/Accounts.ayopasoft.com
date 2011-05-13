@@ -140,7 +140,7 @@ hr{
 	-webkit-box-shadow: 3px 3px 10px #27341d;
 	-moz-box-shadow: 3px 3px 10px #27341d;
 	box-shadow: 3px 3px 10px #27341d;
-	behavior: url(ie-css3.htc);
+	behavior: url(/ie-css3.htc);
 	border:0px solid #64BC27;
 	/*background:url(../images/white_transparent_bg.png) transparent;*/
 	background:#ffffff;
@@ -158,7 +158,7 @@ hr{
 	box-shadow: 2px 2px 6px #27341d;
 	
 	
-	behavior: url(ie-css3.htc);
+	behavior: url(/ie-css3.htc);
 	border:1px solid #fff;
 	background:#fff repeat-x;
 	background-image:url(../images/box_gradient.png);
@@ -174,7 +174,7 @@ hr{
 	-moz-box-shadow: 3px 3px 10px #4F6C37;
 	box-shadow: 3px 3px 10px #4F6C37;
 	
-	behavior: url(ie-css3.htc);
+	behavior: url(/ie-css3.htc);
 }
 .ayopa_content_top_middle{
 	background:#65C027;
@@ -210,7 +210,7 @@ hr{
 	-moz-border-radius: 20px;
 	-webkit-border-radius: 20px;
 	border-radius: 20px;
-	behavior: url(ie-css3.htc);
+	behavior: url(/ie-css3.htc);
 	border:0px solid #64BC27;
 	background:url(../images/white_transparent_bg.png) transparent;
 
@@ -268,7 +268,7 @@ hr{
 	box-shadow: 2px 2px 6px #27341d;
 	
 	
-	behavior: url(ie-css3.htc);
+	behavior: url(/ie-css3.htc);
 	border:1px solid #fff;
 	background:#fff;	
 	
