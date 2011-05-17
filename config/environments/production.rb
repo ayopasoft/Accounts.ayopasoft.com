@@ -26,3 +26,12 @@ config.action_controller.perform_caching             = true
 
 # Enable threaded mode
 # config.threadsafe!
+
+config.action_mailer.smtp_settings = {
+  :address => "smtp.gmail.com",
+  :port => 465,
+  :user_name => "rebate@ayopasoft.com",
+  :authentication => :plain,
+  :domain => "ayopasoft.com",
+  :password => "ayopa2011"
+}

@@ -17,10 +17,10 @@ config.action_controller.perform_caching             = false
 config.action_mailer.raise_delivery_errors = false
 
 config.action_mailer.smtp_settings = {
-  :address => "remote.happyjacksoftware.com",
-  :port => 2525,
-  :user_name => "info@wyo4ed.org",
+  :address => "smtp.gmail.com",
+  :port => 465,
+  :user_name => "rebate@ayopasoft.com",
   :authentication => :plain,
-  :domain => "wyo4ed.org",
-  :password => "M8brer3n"
+  :domain => "ayopasoft.com",
+  :password => "ayopa2011"
 }
