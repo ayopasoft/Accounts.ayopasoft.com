@@ -28,8 +28,9 @@ config.action_controller.perform_caching             = true
 # config.threadsafe!
 
 config.action_mailer.smtp_settings = {
+  :enable_starttls_auto => true,
   :address => "smtp.gmail.com",
-  :port => 465,
+  :port => 587,
   :user_name => "rebate@ayopasoft.com",
   :authentication => :plain,
   :domain => "ayopasoft.com",
