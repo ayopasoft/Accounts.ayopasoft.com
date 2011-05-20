@@ -7,9 +7,9 @@ class BuyersController < ApplicationController
   before_filter :buyer_authorize
   
   def index
-    @buyer = Buyer.find_by_id(session[:user_id])
+    @buyer = Buyer.find(session[:user_id])
     
-    @purchases = Purchase.find(:all, :conditions => ["`purchase_buyer_id` = ?", @buyer.buyer_id], :order => "purchase_date desc")
+    @purchases = Purchase.find(:all, :conditions => ["`purchase_buyer_id` = ?", session[:user_id]], :order => "purchase_date desc")
     
     @purchases.each do |p|
       url = URI.parse('http://beta.ayopasoft.com/AyopaServer/current-auction-info')
