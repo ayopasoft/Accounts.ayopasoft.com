@@ -19,12 +19,14 @@ class Buyer < SimpleRecord::Base
   
   def self.authenticate(email, password)
     user = self.find(:first, :conditions => ["`buyer_email` = ?", email])
-    if user
+    if user && user.buyer_salt
       expected_password = encrypted_password(password, user.buyer_salt)
       
       if user.buyer_password != expected_password
         user = nil
-      end      
+      end 
+    else
+      user = nil
     end
     user
   end
